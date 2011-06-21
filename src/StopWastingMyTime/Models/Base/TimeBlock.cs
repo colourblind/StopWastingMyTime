@@ -1,0 +1,201 @@
+/*
+ * Business Object to ADO
+ * Base.cst
+ * Template version: 0.5.0.4
+ */
+ 
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Xml.Serialization;
+using System.Web.Script.Serialization;
+
+namespace StopWastingMyTime.Models.Base
+{
+    [XmlType("Base.TimeBlock")]
+    public class TimeBlock : IComparable<Base.TimeBlock>, IComparable
+    {
+        #region Fields
+
+        private Guid _timeBlockId = Guid.Empty;
+        private Guid _userId = Guid.Empty;
+        private string _jobId = String.Empty;
+        private DateTime _date;
+        private decimal _time;
+
+
+
+        private bool _isNew = true;
+
+        #endregion
+
+        #region Properties
+
+        public Guid TimeBlockId
+        {
+            get { return _timeBlockId; }
+            set { _timeBlockId = value; }
+        }
+		
+        public virtual Guid UserId
+        {
+            get { return _userId; }
+            set { _userId = value; }
+        }
+		
+        public virtual string JobId
+        {
+            get { return _jobId; }
+            set { _jobId = value; }
+        }
+		
+        public virtual DateTime Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
+		
+        public virtual decimal Time
+        {
+            get { return _time; }
+            set { _time = value; }
+        }
+		
+        public bool IsNew
+        {
+            get { return _isNew; }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        public TimeBlock()
+        {
+            _timeBlockId = Guid.Empty;
+        }
+		
+        public TimeBlock(Guid timeBlockId)
+        {
+            Load(timeBlockId);
+        }
+		
+        internal TimeBlock(Data.TimeBlock dataObject)
+        {
+            Load(dataObject);
+        }
+
+        #endregion
+
+        #region Methods
+
+        internal void Load(Guid timeBlockId)
+        {
+            Load(Data.TimeBlock.SelectById(timeBlockId));
+        }
+
+        internal void Load(Data.TimeBlock dataObject)
+        {
+            if (dataObject == null)
+            {
+                _isNew = true;
+            }
+            else
+            {
+                _timeBlockId = dataObject.TimeBlockId;
+                _userId = dataObject.UserId;
+                _jobId = dataObject.JobId;
+                _date = dataObject.Date;
+                _time = dataObject.Time;
+
+                _isNew = false;
+            }
+
+            Refresh();
+        }
+
+        public virtual void Save()
+        {
+            Save(true);
+        }
+        
+        protected virtual void Save(bool refresh)
+        {
+            Data.TimeBlock dataObject = new Data.TimeBlock();
+
+            dataObject.TimeBlockId = _timeBlockId;
+            dataObject.UserId = _userId;
+            dataObject.JobId = _jobId;
+            dataObject.Date = _date;
+            dataObject.Time = _time;
+
+            if (IsNew)
+                dataObject.Insert();
+            else
+                dataObject.Update();
+			
+            _timeBlockId = dataObject.TimeBlockId;
+            if (refresh)
+                Refresh();
+
+            _isNew = false;
+        }
+        
+        internal virtual void Restore()
+        {
+            _isNew = true;
+            Save(false);
+            
+            
+            Refresh();
+        }
+
+        public virtual void Delete()
+        {
+            Data.TimeBlock.Delete(TimeBlockId);
+            Refresh();
+        }
+		
+        public virtual void Refresh()
+        {
+        }
+        
+        public override bool Equals(object obj)
+        {
+            return this.CompareTo(obj) == 0;
+        }
+		
+        public virtual int CompareTo(TimeBlock obj)
+        {
+            return TimeBlockId.CompareTo(obj.TimeBlockId) * 1;
+        }
+		
+        public virtual int CompareTo(object obj)
+        {
+            if (obj is TimeBlock)
+                return CompareTo((TimeBlock)obj);
+            else
+                throw new InvalidCastException("Unable to compare TimeBlock and " + obj.GetType().Name);
+        }
+
+        #endregion
+
+        #region Statics
+        
+        protected static List<StopWastingMyTime.Models.TimeBlock> ConvertDataItemList(IEnumerable<Data.TimeBlock> data)
+        {
+            List<StopWastingMyTime.Models.TimeBlock> result = new List<StopWastingMyTime.Models.TimeBlock>();
+            foreach (Data.TimeBlock dataItem in data)
+                result.Add(new StopWastingMyTime.Models.TimeBlock(dataItem));
+            return result;
+        }
+
+        public static List<StopWastingMyTime.Models.TimeBlock> SelectAll()
+        {
+            return ConvertDataItemList(Data.TimeBlock.Select());
+        }
+
+		#endregion
+	}
+}
+
