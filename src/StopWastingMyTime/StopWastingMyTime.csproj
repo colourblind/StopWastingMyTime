@@ -66,6 +66,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Base\Job.cs" />
+    <Compile Include="Models\Base\TimeBlock.cs" />
+    <Compile Include="Models\Base\User.cs" />
+    <Compile Include="Models\Data\Code\BigBallOfSql.cs" />
+    <Compile Include="Models\Data\Code\ConnectionFactory.cs" />
+    <Compile Include="Models\Data\Code\DataUtils.cs" />
+    <Compile Include="Models\Data\Job.cs" />
+    <Compile Include="Models\Data\TimeBlock.cs" />
+    <Compile Include="Models\Data\User.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\TimeBlock.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +92,12 @@
     <Content Include="Views\Shared\Default.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\Colourblind.Core\Colourblind.Core.csproj">
+      <Project>{92F03B9D-44B4-4E79-B42D-49B07900EF67}</Project>
+      <Name>Colourblind.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Static\Javascript\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
