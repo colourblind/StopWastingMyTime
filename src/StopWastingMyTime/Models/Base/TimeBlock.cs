@@ -18,7 +18,7 @@ namespace StopWastingMyTime.Models.Base
         #region Fields
 
         private Guid _timeBlockId = Guid.Empty;
-        private Guid _userId = Guid.Empty;
+        private string _userId = String.Empty;
         private string _jobId = String.Empty;
         private DateTime _date;
         private decimal _time;
@@ -37,7 +37,7 @@ namespace StopWastingMyTime.Models.Base
             set { _timeBlockId = value; }
         }
 		
-        public virtual Guid UserId
+        public virtual string UserId
         {
             get { return _userId; }
             set { _userId = value; }
