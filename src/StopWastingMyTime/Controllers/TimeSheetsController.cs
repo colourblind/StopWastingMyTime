@@ -13,6 +13,11 @@ namespace StopWastingMyTime.Controllers
             return View(Models.TimeBlock.SelectByUserId(User.Identity.Name));
         }
 
+        public ActionResult TimesheetList()
+        {
+            return PartialView(Models.TimeBlock.SelectByUserId(User.Identity.Name));
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AddLine(FormCollection form)
         {
@@ -24,7 +29,7 @@ namespace StopWastingMyTime.Controllers
             timeBlock.Time = Decimal.Parse(form["hours"]);
             timeBlock.Save();
 
-            return View();
+            return RedirectToAction("TimesheetList");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -39,7 +44,7 @@ namespace StopWastingMyTime.Controllers
             timeBlock.Time = Decimal.Parse(form["hours"]);
             timeBlock.Save();
 
-            return View();
+            return RedirectToAction("TimesheetList");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -51,7 +56,7 @@ namespace StopWastingMyTime.Controllers
 
             timeBlock.Delete();
 
-            return View();
+            return RedirectToAction("TimesheetList");
         }
     }
 }
