@@ -23,6 +23,8 @@ namespace StopWastingMyTime.Models.Base
         private DateTime _date;
         private decimal _time;
 
+        private StopWastingMyTime.Models.Job _job = null;
+        private StopWastingMyTime.Models.User _user = null;
 
 
         private bool _isNew = true;
@@ -61,7 +63,31 @@ namespace StopWastingMyTime.Models.Base
             set { _time = value; }
         }
 		
-        public bool IsNew
+
+		[XmlIgnore]
+		[ScriptIgnore]
+        public virtual StopWastingMyTime.Models.Job Job
+        {
+            get
+            {
+                if (_job == null)
+                    _job = new StopWastingMyTime.Models.Job(JobId);
+                return _job;
+            }
+        }
+        
+		[XmlIgnore]
+		[ScriptIgnore]
+        public virtual StopWastingMyTime.Models.User User
+        {
+            get
+            {
+                if (_user == null)
+                    _user = new StopWastingMyTime.Models.User(UserId);
+                return _user;
+            }
+        }
+                public bool IsNew
         {
             get { return _isNew; }
         }
@@ -158,6 +184,8 @@ namespace StopWastingMyTime.Models.Base
 		
         public virtual void Refresh()
         {
+            _job = null;
+            _user = null;
         }
         
         public override bool Equals(object obj)
@@ -195,6 +223,16 @@ namespace StopWastingMyTime.Models.Base
             return ConvertDataItemList(Data.TimeBlock.Select());
         }
 
+        public static List<StopWastingMyTime.Models.TimeBlock> SelectByJobId(string jobId)
+        {
+			return ConvertDataItemList(Data.TimeBlock.SelectByJobId(jobId));
+		}
+		
+        public static List<StopWastingMyTime.Models.TimeBlock> SelectByUserId(string userId)
+        {
+			return ConvertDataItemList(Data.TimeBlock.SelectByUserId(userId));
+		}
+		
 		#endregion
 	}
 }

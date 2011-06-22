@@ -21,6 +21,7 @@ namespace StopWastingMyTime.Models.Base
         private bool _billable;
 
 
+        private List<StopWastingMyTime.Models.TimeBlock> _timeBlocks = null;
 
         private bool _isNew = true;
 
@@ -40,6 +41,16 @@ namespace StopWastingMyTime.Models.Base
             set { _billable = value; }
         }
 		
+
+        public virtual IList<StopWastingMyTime.Models.TimeBlock> TimeBlocks
+        {
+            get
+            {
+                if (_timeBlocks == null)
+                    _timeBlocks = TimeBlock.SelectByJobId(JobId);
+                return _timeBlocks;
+            }
+        }
         public bool IsNew
         {
             get { return _isNew; }
@@ -119,6 +130,11 @@ namespace StopWastingMyTime.Models.Base
             _isNew = true;
             Save(false);
             
+            foreach (TimeBlock timeBlock in TimeBlocks)
+            {
+                timeBlock.JobId = JobId;
+                timeBlock.Restore();
+            }
             
             Refresh();
         }
@@ -131,6 +147,7 @@ namespace StopWastingMyTime.Models.Base
 		
         public virtual void Refresh()
         {
+            _timeBlocks = null;
         }
         
         public override bool Equals(object obj)

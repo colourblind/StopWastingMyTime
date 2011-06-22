@@ -203,5 +203,79 @@ namespace StopWastingMyTime.Models.Data
         }
 
         #endregion
+        
+        #region Foreign Key Selects
+        
+        public static List<TimeBlock> SelectByJobId(string jobId)
+        {
+            List<TimeBlock> result = new List<TimeBlock>();
+        
+            using (DataTable data = new DataTable())
+            {
+                SqlConnection connection = null;
+                SqlCommand command = null;
+                
+                try
+                {
+                    connection = ConnectionFactory.GetConnection();
+                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "TimeBlock] WHERE ([JobId] = @jobId)", connection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(jobId)));
+                    adapter.Fill(data);
+
+                    foreach (DataRow dataRow in data.Rows)
+                        result.Add(new TimeBlock(dataRow));
+                }
+                catch (Exception e)
+                {
+                    DataUtils.AddDataToException(ref e, command);
+                    throw;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        public static List<TimeBlock> SelectByUserId(string userId)
+        {
+            List<TimeBlock> result = new List<TimeBlock>();
+        
+            using (DataTable data = new DataTable())
+            {
+                SqlConnection connection = null;
+                SqlCommand command = null;
+                
+                try
+                {
+                    connection = ConnectionFactory.GetConnection();
+                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "TimeBlock] WHERE ([UserId] = @userId)", connection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    command.Parameters.Add(new SqlParameter("UserId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(userId)));
+                    adapter.Fill(data);
+
+                    foreach (DataRow dataRow in data.Rows)
+                        result.Add(new TimeBlock(dataRow));
+                }
+                catch (Exception e)
+                {
+                    DataUtils.AddDataToException(ref e, command);
+                    throw;
+                }
+                finally
+                {
+                    if (connection != null)
+                        connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }
