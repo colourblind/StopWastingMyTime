@@ -11,10 +11,11 @@
     <div id="timesheet">
     <% foreach (var timeBlock in Model) { %>
         <div>
-            <input type="text" class="date" readonly="readonly" />
-            <input type="text" class="workPackage" readonly="readonly" />
-            <input type="text" class="hours" readonly="readonly" />
+            <input type="text" class="date" readonly="readonly" value="<%= Html.Encode(timeBlock.Date) %>" />
+            <input type="text" class="workPackage" readonly="readonly" value="<%= Html.Encode(timeBlock.JobId) %>" />
+            <input type="text" class="hours" readonly="readonly" value="<%= Html.Encode(timeBlock.Time) %>" />
             <a href="#" class="edit">Edit</a>
+            <a href="#" class="save" style="display: none;">Save</a>
             <a href="#" class="cancel" style="display: none;">Cancel</a>
             <a href="#" class="delete">Delete</a>
         </div>

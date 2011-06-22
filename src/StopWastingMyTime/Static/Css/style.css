@@ -36,7 +36,6 @@ div.centre
 
 /* Forms */
 
-div.form .line { clear: left; }
-div.form label { float: left; width: 100px; }
-div.form input, div.form select, div.form textarea { float: left; }
+input[readonly] { background-color: #ccc; color: #333; }
+
 

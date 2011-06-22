@@ -17,6 +17,8 @@ $(document).ready(function() {
         var line = $(this).parents('div:first');
         line.find('input').removeAttr('readonly');
         line.find('.cancel').show();
+        line.find('.save').show();
+        line.find('.delete').hide();
         $(this).hide();
     });
     
@@ -24,6 +26,8 @@ $(document).ready(function() {
         var line = $(this).parents('div:first');
         line.find('input').attr('readonly', 'readonly');
         line.find('.edit').show();
+        line.find('.delete').show();
+        line.find('.save').hide();
         $(this).hide();
     });
     
@@ -32,6 +36,8 @@ $(document).ready(function() {
         var date = line.find('.date');
         var workPackage = line.find('.workPackage');
         var hours = line.find('.hours');
+        
+        alert('date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val());
         
         $.ajax({
             type: 'POST',
