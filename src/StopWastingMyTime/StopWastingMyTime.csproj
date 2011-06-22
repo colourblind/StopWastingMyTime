@@ -97,6 +97,7 @@
     <Content Include="Views\Timesheets\EditLine.aspx" />
     <Content Include="Views\Timesheets\Index.aspx" />
     <Content Include="Views\Timesheets\RemoveLine.aspx" />
+    <Content Include="Views\Timesheets\TimesheetList.ascx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Colourblind.Core\Colourblind.Core.csproj">
