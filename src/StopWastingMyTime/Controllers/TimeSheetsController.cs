@@ -18,7 +18,7 @@ namespace StopWastingMyTime.Controllers
             return PartialView(Models.TimeBlock.SelectByUserId(User.Identity.Name));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public ActionResult AddLine(FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock();
@@ -32,10 +32,10 @@ namespace StopWastingMyTime.Controllers
             return RedirectToAction("TimesheetList");
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditLine(FormCollection form)
+        [HttpPost]
+        public ActionResult EditLine(Guid id, FormCollection form)
         {
-            Models.TimeBlock timeBlock = new Models.TimeBlock(new Guid(form["timeBlockId"]));
+            Models.TimeBlock timeBlock = new Models.TimeBlock(id);
             if (timeBlock.UserId != User.Identity.Name)
                 return View();
 
@@ -47,10 +47,10 @@ namespace StopWastingMyTime.Controllers
             return RedirectToAction("TimesheetList");
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult RemoveLine(FormCollection form)
+        [HttpPost]
+        public ActionResult RemoveLine(Guid id, FormCollection form)
         {
-            Models.TimeBlock timeBlock = new Models.TimeBlock(new Guid(form["timeBlockId"]));
+            Models.TimeBlock timeBlock = new Models.TimeBlock(id);
             if (timeBlock.UserId != User.Identity.Name)
                 return View();
 

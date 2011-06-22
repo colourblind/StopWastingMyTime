@@ -45,8 +45,8 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: '/Timesheets/EditLine',
-            data: 'timeBlockId=' + timeBlockId.val() + '&date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val(),
+            url: '/Timesheets/EditLine/' + timeBlockId.val(),
+            data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val(),
             success: function(data) { $('#timesheet').html(data); }
         });
 
@@ -64,8 +64,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/Timesheets/RemoveLine',
-            data: 'timeBlockId=' + timeBlockId.val(),
+            url: '/Timesheets/RemoveLine/' + timeBlockId.val(),
             success: function(data) { $('#timesheet').html(data); }
         });
 
