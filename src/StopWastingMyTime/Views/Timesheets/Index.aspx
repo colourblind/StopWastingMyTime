@@ -11,6 +11,7 @@
     <div id="timesheet">
     <% foreach (var timeBlock in Model) { %>
         <div>
+            <input type="hidden" class="timeBlockId" value="<%= Html.Encode(timeBlock.TimeBlockId) %>" />
             <input type="text" class="date" readonly="readonly" value="<%= Html.Encode(timeBlock.Date) %>" />
             <input type="text" class="workPackage" readonly="readonly" value="<%= Html.Encode(timeBlock.JobId) %>" />
             <input type="text" class="hours" readonly="readonly" value="<%= Html.Encode(timeBlock.Time) %>" />

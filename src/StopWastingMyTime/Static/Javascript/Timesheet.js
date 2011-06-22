@@ -33,16 +33,15 @@ $(document).ready(function() {
     
     $('#timesheet .save').click(function() {
         var line = $(this).parents('div:first');
+        var timeBlockId = line.find('.timeBlockId');
         var date = line.find('.date');
         var workPackage = line.find('.workPackage');
         var hours = line.find('.hours');
         
-        alert('date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val());
-        
         $.ajax({
             type: 'POST',
             url: '/Timesheets/EditLine',
-            data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val()
+            data: 'timeBlockId=' + timeBlockId.val() + '&date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val()
         });
     });
     
@@ -50,12 +49,15 @@ $(document).ready(function() {
         var line = $(this).parents('div:first')
         var date = line.find('.date');
         var workPackage = line.find('.workPackage');
-        var hours = line.find('.hours');
+        var timeBlockId = line.find('.timeBlockId');
+
+        if (!confirm('Delete ' + workPackage.val() + ' from ' + date.val() + '?'))
+            return;
 
         $.ajax({
             type: 'POST',
             url: '/Timesheets/RemoveLine',
-            data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val()
+            data: 'timeBlockId=' + timeBlockId.val()
         });
     });
 })
