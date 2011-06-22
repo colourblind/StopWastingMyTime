@@ -20,7 +20,7 @@ namespace StopWastingMyTime.Models.Base
         private Guid _timeBlockId = Guid.Empty;
         private string _userId = String.Empty;
         private string _jobId = String.Empty;
-        private DateTime _date;
+        private DateTime _date = DateTime.Now;
         private decimal _time;
 
         private StopWastingMyTime.Models.Job _job = null;

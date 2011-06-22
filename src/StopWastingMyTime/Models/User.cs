@@ -29,7 +29,7 @@ namespace StopWastingMyTime.Models
         public static User Validate(string username, string password)
         {
             User user = new User(username);
-            if (Colourblind.Core.Security.CheckHash(password, user.Password))
+            if (!user.IsNew && Colourblind.Core.Security.CheckHash(password, user.Password))
                 return user;
             else
                 return null;

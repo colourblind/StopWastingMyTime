@@ -11,8 +11,8 @@ namespace StopWastingMyTime.Models
 		{
 			
 		}
-		
-		public TimeBlock(Guid timeBlock) : base(timeBlock)
+
+        public TimeBlock(Guid timeBlockId) : base(timeBlockId)
 		{
 			
 		}
