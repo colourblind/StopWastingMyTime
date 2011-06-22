@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopWastingMyTime", "StopWastingMyTime.csproj", "{B89DF9FE-9ECD-4A50-BCF9-91A5C09D9582}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopWastingMyTime", "StopWastingMyTime\StopWastingMyTime.csproj", "{B89DF9FE-9ECD-4A50-BCF9-91A5C09D9582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colourblind.Core", "..\Colourblind.Core\Colourblind.Core.csproj", "{92F03B9D-44B4-4E79-B42D-49B07900EF67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colourblind.Core", "Colourblind.Core\Colourblind.Core.csproj", "{92F03B9D-44B4-4E79-B42D-49B07900EF67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
