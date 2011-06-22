@@ -34,6 +34,9 @@ namespace Colourblind.Core
         
         public static bool CheckHash(string password, string hash)
         {
+            if (hash.Length < SALT_SIZE)
+                return false;
+
             byte[] decodedHash = Convert.FromBase64String(hash);
             string salt = Encoding.ASCII.GetString(decodedHash, 0, SALT_SIZE);
             
