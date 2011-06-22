@@ -36,6 +36,7 @@ div.centre
 
 /* Forms */
 
-input[readonly] { background-color: #ccc; color: #333; }
+input { border: 1px solid #ccc; margin: 2px; }
+input[readonly] { background-color: #ddd; color: #222; }
 
 
