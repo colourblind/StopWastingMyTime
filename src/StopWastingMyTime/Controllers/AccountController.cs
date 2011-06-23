@@ -19,12 +19,12 @@ namespace StopWastingMyTime.Controllers
             return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public ActionResult Login(FormCollection form)
         {
             Models.User user = Models.User.Validate(form["username"], form["password"]);
             if (user != null)
-                FormsAuthentication.SetAuthCookie(user.UserId, false);
+                FormsAuthentication.RedirectFromLoginPage(user.UserId, false);
             
             return View();
         }
