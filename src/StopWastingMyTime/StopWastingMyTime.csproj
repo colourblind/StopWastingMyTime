@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\TimeSheetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -92,6 +93,8 @@
     <Content Include="Static\Css\style.css" />
     <Content Include="Static\Javascript\Timesheet.js" />
     <Content Include="Views\Account\Login.aspx" />
+    <Content Include="Views\Jobs\Index.aspx" />
+    <Content Include="Views\Jobs\List.ascx" />
     <Content Include="Views\Shared\Default.Master" />
     <Content Include="Views\Timesheets\AddLine.aspx" />
     <Content Include="Views\Timesheets\EditLine.aspx" />
