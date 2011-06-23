@@ -10,12 +10,12 @@ namespace StopWastingMyTime.Controllers
     {
         public ActionResult Index()
         {
-            return View(Models.TimeBlock.SelectByUserId(User.Identity.Name));
+            return View(Models.TimeBlock.SelectByUserId(User.Identity.Name).OrderBy(x => x.Date));
         }
 
         public ActionResult TimesheetList()
         {
-            return PartialView(Models.TimeBlock.SelectByUserId(User.Identity.Name));
+            return PartialView(Models.TimeBlock.SelectByUserId(User.Identity.Name).OrderBy(x => x.Date));
         }
 
         [HttpPost]
