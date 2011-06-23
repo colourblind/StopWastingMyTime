@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     $('#timesheet .edit').live('click', function() {
         var line = $(this).parents('div:first');
-        line.find('input').removeAttr('readonly');
+        line.find('input').removeAttr('disabled');
         line.find('.cancel').show();
         line.find('.save').show();
         line.find('.delete').hide();
@@ -28,7 +28,7 @@ $(document).ready(function() {
     
     $('#timesheet .cancel').live('click', function() {
         var line = $(this).parents('div:first');
-        line.find('input').attr('readonly', 'readonly');
+        line.find('input').attr('disabled', 'disabled');
         line.find('.edit').show();
         line.find('.delete').show();
         line.find('.save').hide();
@@ -69,5 +69,9 @@ $(document).ready(function() {
         });
 
         return false;
+    });
+    
+    $('#timesheet .date').live('click', function() {
+        $(this).datepicker({showOn: 'focus', dateFormat: 'dd/mm/yy'}).focus();
     });
 })
