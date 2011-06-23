@@ -72,6 +72,10 @@ $(document).ready(function() {
     });
     
     $('#timesheet .date').live('click', function() {
-        $(this).datepicker({showOn: 'focus', dateFormat: 'dd/mm/yy'}).focus();
+        $(this).datepicker({ showOn: 'focus', dateFormat: 'dd/mm/yy' }).focus();
     });
+    
+    $('#timesheet .workPackage').live('click', function() {
+        $(this).autocomplete({ source: '/Jobs/List' });
+    });    
 })
