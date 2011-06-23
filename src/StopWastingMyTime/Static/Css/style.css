@@ -36,6 +36,6 @@ div.centre
 
 /* Forms */
 
-input { border: 1px solid #ccc; margin: 2px; }
+input, select, textarea { border: 1px solid #ccc; margin: 2px; font-size: 1em; }
 
 
