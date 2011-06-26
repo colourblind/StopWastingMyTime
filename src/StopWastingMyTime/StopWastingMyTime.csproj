@@ -93,8 +93,13 @@
     <Content Include="Static\Css\style.css" />
     <Content Include="Static\Javascript\Timesheet.js" />
     <Content Include="Views\Account\Login.aspx" />
+    <Content Include="Views\Jobs\Create.aspx" />
+    <Content Include="Views\Jobs\Delete.aspx" />
     <Content Include="Views\Jobs\Index.aspx" />
     <Content Include="Views\Jobs\List.ascx" />
+    <Content Include="Views\Jobs\Edit.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Views\Shared\Default.Master" />
     <Content Include="Views\Timesheets\AddLine.aspx" />
     <Content Include="Views\Timesheets\EditLine.aspx" />

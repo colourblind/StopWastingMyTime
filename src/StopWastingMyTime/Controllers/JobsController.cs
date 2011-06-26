@@ -19,9 +19,9 @@ namespace StopWastingMyTime.Controllers
             return PartialView(Models.Job.SelectAll().Where(x => x.JobId.ToLower().StartsWith(term)));
         }
 
-        public ActionResult Details(string jobId)
+        public ActionResult Details(string id)
         {
-            Models.Job job = new Models.Job(jobId);
+            Models.Job job = new Models.Job(id);
             return View(job);
         }
 
@@ -48,19 +48,38 @@ namespace StopWastingMyTime.Controllers
             }
         }
         
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            return View(new Models.Job(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(string jobId, FormCollection form)
+        public ActionResult Edit(string id, FormCollection form)
         {
             try
             {
-                Models.Job job = new Models.Job(jobId);
-                job.Billable = Boolean.Parse(form["billable"]); // TODO: check checkbox behaviour
-                job.Save();
+                Models.Job job = new Models.Job(id);
+
+                if (id != form["JobId"]) // Primary key updated
+                {
+                    // Cheesey cascade update
+                    Models.Job newJob = new Models.Job();
+                    UpdateModel(newJob);
+                    newJob.Save();
+
+                    foreach (Models.TimeBlock timeBlock in Models.TimeBlock.SelectByJobId(id))
+                    {
+                        timeBlock.JobId = newJob.JobId;
+                        timeBlock.Save();
+                    }
+
+                    job.Delete();
+                }
+                else
+                {
+                    UpdateModel<Models.Job>(job);
+                    job.Save();
+                }
  
                 return RedirectToAction("Index");
             }
@@ -70,12 +89,17 @@ namespace StopWastingMyTime.Controllers
             }
         }
 
+        public ActionResult Delete(string id)
+        {
+            return View(new Models.Job(id));
+        }
+
         [HttpPost]
-        public ActionResult Delete(string jobId, FormCollection form)
+        public ActionResult Delete(string id, FormCollection form)
         {
             try
             {
-                Models.Job job = new Models.Job(jobId);
+                Models.Job job = new Models.Job(id);
                 job.Delete();
  
                 return RedirectToAction("Index");
