@@ -15,6 +15,10 @@
 <div id="header">
     <div class="centre">
         <h1>Stop Wasting my Time</h1>
+        <ul id="menu">
+            <li><%= Html.ActionLink("Jobs", "Index", "Jobs") %></li>
+            <li><%= Html.ActionLink("Timesheet", "Index", "Timesheets") %></li>
+        </ul>
     </div>
 </div>
 
