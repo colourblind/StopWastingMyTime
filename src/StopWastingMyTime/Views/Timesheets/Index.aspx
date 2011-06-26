@@ -8,10 +8,25 @@
 
     <h2>Index</h2>
     
+    <div id="filter">
+        <% Html.BeginForm("Index", "Timesheets", FormMethod.Get); %>
+        <%= Html.TextBox("dateFrom", ViewData["dateFrom"]) %>
+        <%= Html.TextBox("dateTo", ViewData["dateTo"]) %>
+        <input type="submit" value="Filter" />
+        <% Html.EndForm(); %>
+    </div>
+    
     <div id="timesheet">
         <% Html.RenderPartial("TimesheetList"); %>
     </div>
-    
-    
+        
     <script type="text/javascript" src="/Static/Javascript/Timesheet.js"></script>
+    <script type="text/javascript">
+    
+    $(document).ready(function() {
+        $('#filter input[type=text]').datepicker({ showOn: 'focus', dateFormat: 'dd/mm/yy' });
+    });
+    
+    </script>
+    
 </asp:Content>

@@ -8,9 +8,14 @@ namespace StopWastingMyTime.Controllers
 {
     public class TimeSheetsController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string dateFrom, string dateTo)
         {
-            return View(Models.TimeBlock.SelectByUserId(User.Identity.Name).OrderBy(x => x.Date));
+            DateTime from, to;
+            DateTime.TryParse(dateFrom, out from);
+            DateTime.TryParse(dateTo, out to);
+            IEnumerable<Models.TimeBlock> data = Models.TimeBlock.SelectByUserId(User.Identity.Name);
+            data = data.Where(x => x.Date >= from && x.Date <= (to == DateTime.MinValue ? DateTime.MaxValue : to));
+            return View(data.OrderBy(x => x.Date));
         }
 
         public ActionResult TimesheetList()
