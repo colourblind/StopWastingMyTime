@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    var jobData = [];
+    $.get('/Jobs/List?term=', function(data) { jobData = $.parseJSON(data); });
+    
     $('#timesheet .add').live('click', function() {
         var line = $(this).parents('div:first');
         var date = line.find('.date');
@@ -76,6 +79,6 @@ $(document).ready(function() {
     });
     
     $('#timesheet .workPackage').live('click', function() {
-        $(this).autocomplete({ source: '/Jobs/List' });
+        $(this).autocomplete({ source: jobData, delay: 0 });
     });    
 })
