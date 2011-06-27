@@ -26,7 +26,7 @@
                 <%= Html.LabelFor(model => model.Billable) %>
             </div>
             <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.Billable) %>
+                <%= Html.CheckBoxFor(model => model.Billable) %>
                 <%= Html.ValidationMessageFor(model => model.Billable) %>
             </div>
             
