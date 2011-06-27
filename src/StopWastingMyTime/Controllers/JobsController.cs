@@ -33,6 +33,9 @@ namespace StopWastingMyTime.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection form)
         {
+            if (!ValidateModel(form))
+                return View();
+
             try
             {
                 Models.Job job = new Models.Job();
@@ -56,6 +59,9 @@ namespace StopWastingMyTime.Controllers
         [HttpPost]
         public ActionResult Edit(string id, FormCollection form)
         {
+            if (!ValidateModel(form))
+                return View();
+
             try
             {
                 Models.Job job = new Models.Job(id);
@@ -108,6 +114,14 @@ namespace StopWastingMyTime.Controllers
             {
                 return View();
             }
+        }
+
+        private bool ValidateModel(FormCollection form)
+        {
+            if (String.IsNullOrEmpty(form["JobId"]))
+                ModelState.AddModelError("JobId", "Job ID is missing");
+
+            return ModelState.IsValid;
         }
     }
 }
