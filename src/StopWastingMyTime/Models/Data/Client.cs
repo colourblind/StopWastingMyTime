@@ -11,28 +11,26 @@ using System.Data.SqlClient;
 
 namespace StopWastingMyTime.Models.Data
 {
-    public partial class Job
+    public partial class Client
     {
         #region Fields
 
-        public string JobId;
         public Guid ClientId;
-        public bool Billable;
+        public string Name;
 
         #endregion
 
         #region Constructors
 
-        public Job()
+        public Client()
         {
 
         }
 
-        private Job(DataRow data)
+        private Client(DataRow data)
         {
-            JobId = (string)data["JobId"];
             ClientId = (Guid)data["ClientId"];
-            Billable = (bool)data["Billable"];
+            Name = (string)data["Name"];
         }
 
         #endregion
@@ -47,10 +45,9 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Job] ([JobId], [ClientId], [Billable]) VALUES (@JobId, @ClientId, @Billable)", connection);
-                command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
+                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Client] ([ClientId], [Name]) VALUES (@ClientId, @Name)", connection);
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
-                command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
+                command.Parameters.Add(new SqlParameter("Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Name)));
                 command.ExecuteNonQuery();
                 
             }
@@ -78,10 +75,9 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Job] SET [JobId] = @JobId, [ClientId] = @ClientId, [Billable] = @Billable WHERE [JobId] = @JobId", connection);
+                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Client] SET [ClientId] = @ClientId, [Name] = @Name WHERE [ClientId] = @ClientId", connection);
+                command.Parameters.Add(new SqlParameter("Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Name)));
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
-                command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
-                command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
                 command.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -100,9 +96,9 @@ namespace StopWastingMyTime.Models.Data
 
         #region Select
 
-        public static List<Job> Select()
+        public static List<Client> Select()
         {
-            List<Job> result = new List<Job>();
+            List<Client> result = new List<Client>();
             using (DataTable data = new DataTable())
             {
                 SqlConnection connection = null;
@@ -111,12 +107,12 @@ namespace StopWastingMyTime.Models.Data
                 try
                 {
                     connection = ConnectionFactory.GetConnection();
-                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "Job]", connection);
+                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "Client]", connection);
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     adapter.Fill(data);
 
                     foreach (DataRow dataRow in data.Rows)
-                        result.Add(new Job(dataRow));
+                        result.Add(new Client(dataRow));
                 }
                 catch (Exception e)
                 {
@@ -132,9 +128,9 @@ namespace StopWastingMyTime.Models.Data
             return result;
         }
 
-        public static Job SelectById(string jobId)
+        public static Client SelectById(Guid clientId)
         {
-            Job result = null;
+            Client result = null;
             using (DataTable data = new DataTable())
             {
                 SqlConnection connection = null;
@@ -143,13 +139,13 @@ namespace StopWastingMyTime.Models.Data
                 try
                 {
                     connection = ConnectionFactory.GetConnection();
-                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "Job] WHERE [JobId] = @JobId", connection);
-                    command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(jobId)));
+                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "Client] WHERE [ClientId] = @ClientId", connection);
+                    command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(clientId)));
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     adapter.Fill(data);
 
                     if (data.Rows.Count > 0)
-                        result = new Job(data.Rows[0]);
+                        result = new Client(data.Rows[0]);
                 }
                 catch (Exception e)
                 {
@@ -170,7 +166,7 @@ namespace StopWastingMyTime.Models.Data
 
         #region Delete
 
-        public static void Delete(string jobId)
+        public static void Delete(Guid clientId)
         {
             SqlConnection connection = null;
             SqlCommand command = null;
@@ -178,8 +174,8 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("DELETE FROM [" + ConnectionFactory.TableNamePrefix + "Job] WHERE [JobId] = @JobId", connection);
-                command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(jobId)));
+                command = new SqlCommand("DELETE FROM [" + ConnectionFactory.TableNamePrefix + "Client] WHERE [ClientId] = @ClientId", connection);
+                command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(clientId)));
                 command.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -192,45 +188,6 @@ namespace StopWastingMyTime.Models.Data
                 if (connection != null)
                     connection.Close();
             }
-        }
-
-        #endregion
-        
-        #region Foreign Key Selects
-        
-        public static List<Job> SelectByClientId(Guid clientId)
-        {
-            List<Job> result = new List<Job>();
-        
-            using (DataTable data = new DataTable())
-            {
-                SqlConnection connection = null;
-                SqlCommand command = null;
-                
-                try
-                {
-                    connection = ConnectionFactory.GetConnection();
-                    command = new SqlCommand("SELECT * FROM [" + ConnectionFactory.TableNamePrefix + "Job] WHERE ([ClientId] = @clientId)", connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(clientId)));
-                    adapter.Fill(data);
-
-                    foreach (DataRow dataRow in data.Rows)
-                        result.Add(new Job(dataRow));
-                }
-                catch (Exception e)
-                {
-                    DataUtils.AddDataToException(ref e, command);
-                    throw;
-                }
-                finally
-                {
-                    if (connection != null)
-                        connection.Close();
-                }
-            }
-
-            return result;
         }
 
         #endregion

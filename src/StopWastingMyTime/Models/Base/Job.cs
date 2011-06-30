@@ -18,8 +18,10 @@ namespace StopWastingMyTime.Models.Base
         #region Fields
 
         private string _jobId = String.Empty;
+        private Guid _clientId = Guid.Empty;
         private bool _billable;
 
+        private StopWastingMyTime.Models.Client _client = null;
 
         private List<StopWastingMyTime.Models.TimeBlock> _timeBlocks = null;
 
@@ -35,6 +37,12 @@ namespace StopWastingMyTime.Models.Base
             set { _jobId = value; }
         }
 		
+        public virtual Guid ClientId
+        {
+            get { return _clientId; }
+            set { _clientId = value; }
+        }
+		
         public virtual bool Billable
         {
             get { return _billable; }
@@ -42,6 +50,18 @@ namespace StopWastingMyTime.Models.Base
         }
 		
 
+		[XmlIgnore]
+		[ScriptIgnore]
+        public virtual StopWastingMyTime.Models.Client Client
+        {
+            get
+            {
+                if (_client == null)
+                    _client = new StopWastingMyTime.Models.Client(ClientId);
+                return _client;
+            }
+        }
+        
         public virtual IList<StopWastingMyTime.Models.TimeBlock> TimeBlocks
         {
             get
@@ -93,6 +113,7 @@ namespace StopWastingMyTime.Models.Base
             else
             {
                 _jobId = dataObject.JobId;
+                _clientId = dataObject.ClientId;
                 _billable = dataObject.Billable;
 
                 _isNew = false;
@@ -111,6 +132,7 @@ namespace StopWastingMyTime.Models.Base
             Data.Job dataObject = new Data.Job();
 
             dataObject.JobId = _jobId;
+            dataObject.ClientId = _clientId;
             dataObject.Billable = _billable;
 
             if (IsNew)
@@ -147,6 +169,7 @@ namespace StopWastingMyTime.Models.Base
 		
         public virtual void Refresh()
         {
+            _client = null;
             _timeBlocks = null;
         }
         
@@ -185,6 +208,11 @@ namespace StopWastingMyTime.Models.Base
             return ConvertDataItemList(Data.Job.Select());
         }
 
+        public static List<StopWastingMyTime.Models.Job> SelectByClientId(Guid clientId)
+        {
+			return ConvertDataItemList(Data.Job.SelectByClientId(clientId));
+		}
+		
 		#endregion
 	}
 }

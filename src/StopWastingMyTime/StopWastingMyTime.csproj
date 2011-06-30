@@ -68,9 +68,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Base\Client.cs" />
     <Compile Include="Models\Base\Job.cs" />
     <Compile Include="Models\Base\TimeBlock.cs" />
     <Compile Include="Models\Base\User.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Data\Client.cs" />
     <Compile Include="Models\Data\Code\BigBallOfSql.cs" />
     <Compile Include="Models\Data\Code\ConnectionFactory.cs" />
     <Compile Include="Models\Data\Code\DataUtils.cs" />
