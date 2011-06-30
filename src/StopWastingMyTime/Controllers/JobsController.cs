@@ -27,6 +27,7 @@ namespace StopWastingMyTime.Controllers
 
         public ActionResult Create()
         {
+            ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
             return View();
         } 
 
@@ -34,33 +35,41 @@ namespace StopWastingMyTime.Controllers
         public ActionResult Create(FormCollection form)
         {
             if (!ValidateModel(form))
+            {
+                ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
                 return View();
+            }
 
             try
             {
                 Models.Job job = new Models.Job();
-                job.JobId = form["jobId"];
-                job.Billable = Boolean.Parse(form["billable"]); // TODO: check checkbox behaviour
+                UpdateModel(job);
                 job.Save();
 
                 return RedirectToAction("Index");
             }
             catch
             {
+                ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
                 return View();
             }
         }
         
         public ActionResult Edit(string id)
         {
-            return View(new Models.Job(id));
+            Models.Job job = new Models.Job(id);
+            ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name", job.ClientId);
+            return View(job);
         }
 
         [HttpPost]
         public ActionResult Edit(string id, FormCollection form)
         {
             if (!ValidateModel(form))
+            {
+                ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
                 return View();
+            }
 
             try
             {
@@ -91,6 +100,7 @@ namespace StopWastingMyTime.Controllers
             }
             catch
             {
+                ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
                 return View();
             }
         }
@@ -120,6 +130,8 @@ namespace StopWastingMyTime.Controllers
         {
             if (String.IsNullOrEmpty(form["JobId"]))
                 ModelState.AddModelError("JobId", "Job ID is missing");
+            if (String.IsNullOrEmpty(form["ClientId"]))
+                ModelState.AddModelError("ClientId", "Client is missing");
 
             return ModelState.IsValid;
         }

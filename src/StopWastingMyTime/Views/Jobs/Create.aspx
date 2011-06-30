@@ -23,6 +23,14 @@
             </div>
             
             <div class="editor-label">
+                <%= Html.LabelFor(model => model.ClientId) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.DropDownListFor(model => model.ClientId, (SelectList)ViewData["ClientList"]) %>
+                <%= Html.ValidationMessageFor(model => model.ClientId) %>
+            </div>
+            
+            <div class="editor-label">
                 <%= Html.LabelFor(model => model.Billable) %>
             </div>
             <div class="editor-field">
