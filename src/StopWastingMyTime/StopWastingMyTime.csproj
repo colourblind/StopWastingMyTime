@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\TimeSheetsController.cs" />
@@ -96,6 +97,11 @@
     <Content Include="Static\Css\style.css" />
     <Content Include="Static\Javascript\Timesheet.js" />
     <Content Include="Views\Account\Login.aspx" />
+    <Content Include="Views\Clients\Create.aspx" />
+    <Content Include="Views\Clients\Delete.aspx" />
+    <Content Include="Views\Clients\Details.aspx" />
+    <Content Include="Views\Clients\Edit.aspx" />
+    <Content Include="Views\Clients\Index.aspx" />
     <Content Include="Views\Jobs\Create.aspx" />
     <Content Include="Views\Jobs\Delete.aspx" />
     <Content Include="Views\Jobs\Index.aspx" />
