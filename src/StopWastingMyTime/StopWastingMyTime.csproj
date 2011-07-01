@@ -79,6 +79,7 @@
     <Compile Include="Models\Data\Code\ConnectionFactory.cs" />
     <Compile Include="Models\Data\Code\DataUtils.cs" />
     <Compile Include="Models\Data\Job.cs" />
+    <Compile Include="Models\Data\Reporting.cs" />
     <Compile Include="Models\Data\TimeBlock.cs" />
     <Compile Include="Models\Data\User.cs" />
     <Compile Include="Models\Job.cs" />
