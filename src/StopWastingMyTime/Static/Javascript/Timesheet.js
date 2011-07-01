@@ -2,6 +2,9 @@ $(document).ready(function() {
 
     var jobData = [];
     $.get('/Jobs/List?term=', function(data) { jobData = $.parseJSON(data); });
+
+    var url = window.location.toString();
+    var qs = url.indexOf('?') > 0 ? url.substring(url.indexOf('?')) : '';
     
     $('#timesheet .add').live('click', function() {
         var line = $(this).parents('div:first');
@@ -11,7 +14,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: '/Timesheets/AddLine',
+            url: '/Timesheets/AddLine' + qs,
             data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val(),
             success: function(data) { $('#timesheet').html(data); }
         });
@@ -48,7 +51,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: '/Timesheets/EditLine/' + timeBlockId.val(),
+            url: '/Timesheets/EditLine/' + timeBlockId.val() + qs,
             data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val(),
             success: function(data) { $('#timesheet').html(data); }
         });
@@ -63,11 +66,11 @@ $(document).ready(function() {
         var timeBlockId = line.find('.timeBlockId');
 
         if (!confirm('Delete ' + workPackage.val() + ' from ' + date.val() + '?'))
-            return;
+            return false;
 
         $.ajax({
             type: 'POST',
-            url: '/Timesheets/RemoveLine/' + timeBlockId.val(),
+            url: '/Timesheets/RemoveLine/' + timeBlockId.val() + qs,
             success: function(data) { $('#timesheet').html(data); }
         });
 

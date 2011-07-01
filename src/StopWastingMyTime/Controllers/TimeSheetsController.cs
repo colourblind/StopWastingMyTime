@@ -10,21 +10,22 @@ namespace StopWastingMyTime.Controllers
     {
         public ActionResult Index(string dateFrom, string dateTo)
         {
-            DateTime from, to;
-            DateTime.TryParse(dateFrom, out from);
-            DateTime.TryParse(dateTo, out to);
-            IEnumerable<Models.TimeBlock> data = Models.TimeBlock.SelectByUserId(User.Identity.Name);
-            data = data.Where(x => x.Date >= from && x.Date <= (to == DateTime.MinValue ? DateTime.MaxValue : to));
-            return View(data.OrderBy(x => x.Date));
+            DateTime? from = ParseDate(dateFrom);
+            DateTime? to = ParseDate(dateTo);
+            from = (from == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Day, 1) : from);
+            return View(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, from, to));
         }
 
-        public ActionResult TimesheetList()
+        public ActionResult TimesheetList(string dateFrom, string dateTo)
         {
-            return PartialView(Models.TimeBlock.SelectByUserId(User.Identity.Name).OrderBy(x => x.Date));
+            DateTime? from = ParseDate(dateFrom);
+            DateTime? to = ParseDate(dateTo);
+            from = (from == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Day, 1) : from);
+            return PartialView(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, from, to));
         }
 
         [HttpPost]
-        public ActionResult AddLine(FormCollection form)
+        public ActionResult AddLine(string dateFrom, string dateTo, FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock();
             timeBlock.TimeBlockId = Guid.NewGuid();
@@ -34,11 +35,11 @@ namespace StopWastingMyTime.Controllers
             timeBlock.Time = Decimal.Parse(form["hours"]);
             timeBlock.Save();
 
-            return RedirectToAction("TimesheetList");
+            return RedirectToAction("TimesheetList", new { dateFrom = dateFrom, dateTo = dateTo });
         }
 
         [HttpPost]
-        public ActionResult EditLine(Guid id, FormCollection form)
+        public ActionResult EditLine(Guid id, string dateFrom, string dateTo, FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock(id);
             if (timeBlock.UserId != User.Identity.Name)
@@ -49,11 +50,11 @@ namespace StopWastingMyTime.Controllers
             timeBlock.Time = Decimal.Parse(form["hours"]);
             timeBlock.Save();
 
-            return RedirectToAction("TimesheetList");
+            return RedirectToAction("TimesheetList", new { dateFrom = dateFrom, dateTo = dateTo });
         }
 
         [HttpPost]
-        public ActionResult RemoveLine(Guid id, FormCollection form)
+        public ActionResult RemoveLine(Guid id, string dateFrom, string dateTo, FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock(id);
             if (timeBlock.UserId != User.Identity.Name)
@@ -61,7 +62,15 @@ namespace StopWastingMyTime.Controllers
 
             timeBlock.Delete();
 
-            return RedirectToAction("TimesheetList");
+            return RedirectToAction("TimesheetList", new { dateFrom = dateFrom, dateTo = dateTo });
+        }
+
+        private DateTime? ParseDate(string date)
+        {
+            DateTime result;
+            if (!DateTime.TryParse(date, out result))
+                return null;
+            return result;
         }
     }
 }
