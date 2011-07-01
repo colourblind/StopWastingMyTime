@@ -20,11 +20,19 @@ namespace StopWastingMyTime.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(FormCollection form)
+        public ActionResult Login(string username, string password, string returnUrl)
         {
-            Models.User user = Models.User.Validate(form["username"], form["password"]);
+            Models.User user = Models.User.Validate(username, password);
             if (user != null)
-                FormsAuthentication.RedirectFromLoginPage(user.UserId, false);
+            {
+                if (String.IsNullOrEmpty(returnUrl) || returnUrl == "/")
+                {
+                    FormsAuthentication.SetAuthCookie(user.UserId, false);
+                    return RedirectToAction("Index", "Timesheets");
+                }
+                else
+                    FormsAuthentication.RedirectFromLoginPage(user.UserId, false);
+            }
             
             return View();
         }
