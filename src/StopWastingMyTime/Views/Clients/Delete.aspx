@@ -12,14 +12,11 @@
     <fieldset>
         <legend>Fields</legend>
         
-        <div class="display-label">ClientId</div>
-        <div class="display-field"><%= Html.Encode(Model.ClientId) %></div>
-        
         <div class="display-label">Name</div>
         <div class="display-field"><%= Html.Encode(Model.Name) %></div>
         
-        <div class="display-label">IsNew</div>
-        <div class="display-field"><%= Html.Encode(Model.IsNew) %></div>
+        <div class="display-label">Maintenance per Month</div>
+        <div class="display-field"><%= Html.Encode(Model.MaintenancePerMonth) %></div>
         
     </fieldset>
     <% using (Html.BeginForm()) { %>

@@ -12,13 +12,10 @@
         <tr>
             <th></th>
             <th>
-                ClientId
-            </th>
-            <th>
                 Name
             </th>
             <th>
-                IsNew
+                Maintenance per Month
             </th>
         </tr>
 
@@ -31,13 +28,10 @@
                 <%= Html.ActionLink("Delete", "Delete", new { id = item.ClientId })%>
             </td>
             <td>
-                <%= Html.Encode(item.ClientId) %>
-            </td>
-            <td>
                 <%= Html.Encode(item.Name) %>
             </td>
             <td>
-                <%= Html.Encode(item.IsNew) %>
+                <%= Html.Encode(item.MaintenancePerMonth) %>
             </td>
         </tr>
     
