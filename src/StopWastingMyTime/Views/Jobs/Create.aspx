@@ -31,6 +31,14 @@
             </div>
             
             <div class="editor-label">
+                <%= Html.LabelFor(model => model.QuotedHours) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.TextBoxFor(model => model.QuotedHours) %>
+                <%= Html.ValidationMessageFor(model => model.QuotedHours) %>
+            </div>
+            
+            <div class="editor-label">
                 <%= Html.LabelFor(model => model.Billable) %>
             </div>
             <div class="editor-field">

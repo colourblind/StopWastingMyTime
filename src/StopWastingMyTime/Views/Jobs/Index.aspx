@@ -8,15 +8,19 @@
 
     <h2>Jobs</h2>
     
-    <table>
+    <table cellspacing="0">
         <tr>
             <th>Job Id</th>
+            <th>Client</th>
+            <th>Quoted Hours</th>
             <th>Billable</th>
             <th></th>
         </tr>
     <% foreach (var job in Model) { %>
         <tr>
             <td><%= Html.Encode(job.JobId) %></td>
+            <td><%= Html.Encode(job.Client.Name) %></td>
+            <td><%= Html.Encode(job.QuotedHours) %></td>
             <td><%= Html.Encode(job.Billable) %></th>
             <td><%= Html.ActionLink("Edit", "Edit", new { id = job.JobId }) %> <%= Html.ActionLink("Delete", "Delete", new { id = job.JobId }) %></td>
         </tr>
