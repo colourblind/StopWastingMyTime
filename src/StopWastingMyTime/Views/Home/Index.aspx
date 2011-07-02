@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     <% foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewData["MaintenanceReport"]).Rows) { %>
-        <tr>
+        <tr<%= Convert.ToBoolean(row["Overrun"]) ? " class=\"overrun\"" : "" %>>
             <% foreach (var cell in row.ItemArray) {%>
                 <td><%= cell.ToString() %></td>
             <% } %>
@@ -37,12 +37,12 @@
     </thead>
     <tbody>
     <% foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewData["MonthlyReport"]).Rows) { %>
-        <tr>
+        <tr<%= Convert.ToBoolean(row["Overrun"]) ? " class=\"overrun\"" : "" %>>
             <% foreach (var cell in row.ItemArray) {%>
                 <td><%= cell.ToString() %></td>
             <% } %>
         </tr>
-    <%} %>         
+    <%} %>
     </tbody>
 </table>
 

@@ -86,14 +86,14 @@ GROUP BY
         private const string MONTHLY_SQL =
 @"
 SELECT
-    j.JobId AS [Job], SUM(t.[Time]) AS [Total Hours]
+    j.JobId AS [Job], j.QuotedHours AS [Quoted Hours], SUM(t.[Time]) AS [Total Hours], CASE WHEN j.QuotedHours IS NOT NULL AND SUM(t.[Time]) > j.QuotedHours THEN 1 ELSE 0 END AS [Overrun]
 FROM
     [TimeBlock] t
     INNER JOIN [Job] j ON t.JobId = j.JobId
 WHERE
     j.Billable = 1
 GROUP BY
-    j.JobId
+    j.JobId, j.QuotedHours
 ";
 
         #endregion
