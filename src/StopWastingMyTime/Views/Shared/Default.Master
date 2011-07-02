@@ -16,6 +16,7 @@
     <div class="centre">
         <h1>Stop Wasting my Time</h1>
         <ul id="menu">
+            <li><%= Html.ActionLink("Home", "Index", "Home") %></li>
             <li><%= Html.ActionLink("Clients", "Index", "Clients") %></li>
             <li><%= Html.ActionLink("Jobs", "Index", "Jobs") %></li>
             <li><%= Html.ActionLink("Timesheet", "Index", "Timesheets") %></li>

@@ -70,7 +70,7 @@ namespace StopWastingMyTime.Models.Data
         private const string MAINTENANCE_SQL =
 @"
 SELECT
-    c.[Name] as ClientName, c.MaintenancePerMonth, SUM(t.[Time]) AS TotalHours, CASE WHEN SUM(t.[Time]) > c.MaintenancePerMonth THEN 1 ELSE 0 END AS Overrun
+    c.[Name] AS [Client], c.MaintenancePerMonth AS [Maintenance per Month], SUM(t.[Time]) AS [Total Hours], CASE WHEN SUM(t.[Time]) > c.MaintenancePerMonth THEN 1 ELSE 0 END AS [Overrun]
 FROM
     [TimeBlock] t 
     INNER JOIN [Job] j ON t.JobId = j.JobId
@@ -86,7 +86,7 @@ GROUP BY
         private const string MONTHLY_SQL =
 @"
 SELECT
-    j.JobId, SUM(t.[Time]) AS [Total Hours]
+    j.JobId AS [Job], SUM(t.[Time]) AS [Total Hours]
 FROM
     [TimeBlock] t
     INNER JOIN [Job] j ON t.JobId = j.JobId

@@ -10,6 +10,10 @@ body
 
 div { margin: 0; }
 a { text-decoration: none; }
+td, th { padding: 2px 6px; }
+td { border-top: 1px solid #999; }
+th { text-align: left; }
+table { min-width: 50%; }
 
 /* Layout */
 

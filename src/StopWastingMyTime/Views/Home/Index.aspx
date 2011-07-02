@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <h2>Maintenance Report</h2>
-<table>
+<table cellspacing="0">
     <thead>
         <tr>
             <% foreach (System.Data.DataColumn col in ((System.Data.DataTable)ViewData["MaintenanceReport"]).Columns) { %>
@@ -27,7 +27,7 @@
 </table>
 
 <h2>Monthly Report</h2>
-<table>
+<table cellspacing="0">
     <thead>
         <tr>
             <% foreach (System.Data.DataColumn col in ((System.Data.DataTable)ViewData["MonthlyReport"]).Columns) { %>
