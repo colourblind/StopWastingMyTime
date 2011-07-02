@@ -20,6 +20,7 @@ namespace StopWastingMyTime.Models.Base
         private string _jobId = String.Empty;
         private Guid _clientId = Guid.Empty;
         private bool _billable;
+        private decimal? _quotedHours = null;
 
         private StopWastingMyTime.Models.Client _client = null;
 
@@ -47,6 +48,12 @@ namespace StopWastingMyTime.Models.Base
         {
             get { return _billable; }
             set { _billable = value; }
+        }
+		
+        public virtual decimal? QuotedHours
+        {
+            get { return _quotedHours; }
+            set { _quotedHours = value; }
         }
 		
 
@@ -115,6 +122,7 @@ namespace StopWastingMyTime.Models.Base
                 _jobId = dataObject.JobId;
                 _clientId = dataObject.ClientId;
                 _billable = dataObject.Billable;
+                _quotedHours = dataObject.QuotedHours;
 
                 _isNew = false;
             }
@@ -134,6 +142,7 @@ namespace StopWastingMyTime.Models.Base
             dataObject.JobId = _jobId;
             dataObject.ClientId = _clientId;
             dataObject.Billable = _billable;
+            dataObject.QuotedHours = _quotedHours;
 
             if (IsNew)
                 dataObject.Insert();

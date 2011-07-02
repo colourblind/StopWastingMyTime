@@ -18,6 +18,7 @@ namespace StopWastingMyTime.Models.Data
         public string JobId;
         public Guid ClientId;
         public bool Billable;
+        public decimal? QuotedHours;
 
         #endregion
 
@@ -33,6 +34,7 @@ namespace StopWastingMyTime.Models.Data
             JobId = (string)data["JobId"];
             ClientId = (Guid)data["ClientId"];
             Billable = (bool)data["Billable"];
+            QuotedHours = (decimal?)DataUtils.ConvertDbNulls(data["QuotedHours"]);
         }
 
         #endregion
@@ -47,10 +49,11 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Job] ([JobId], [ClientId], [Billable]) VALUES (@JobId, @ClientId, @Billable)", connection);
+                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Job] ([JobId], [ClientId], [Billable], [QuotedHours]) VALUES (@JobId, @ClientId, @Billable, @QuotedHours)", connection);
                 command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
+                command.Parameters.Add(new SqlParameter("QuotedHours", SqlDbType.Decimal, 5, ParameterDirection.Input, true, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(QuotedHours)));
                 command.ExecuteNonQuery();
                 
             }
@@ -78,9 +81,10 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Job] SET [JobId] = @JobId, [ClientId] = @ClientId, [Billable] = @Billable WHERE [JobId] = @JobId", connection);
+                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Job] SET [JobId] = @JobId, [ClientId] = @ClientId, [Billable] = @Billable, [QuotedHours] = @QuotedHours WHERE [JobId] = @JobId", connection);
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
+                command.Parameters.Add(new SqlParameter("QuotedHours", SqlDbType.Decimal, 5, ParameterDirection.Input, true, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(QuotedHours)));
                 command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
                 command.ExecuteNonQuery();
             }
