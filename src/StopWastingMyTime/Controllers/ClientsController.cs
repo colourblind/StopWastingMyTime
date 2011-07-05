@@ -29,8 +29,8 @@ namespace StopWastingMyTime.Controllers
             try
             {
                 Models.Client client = new Models.Client();
+                UpdateModel(client);
                 client.ClientId = Guid.NewGuid();
-                client.Name = form["Name"];
                 client.Save();
 
                 return RedirectToAction("Index");
