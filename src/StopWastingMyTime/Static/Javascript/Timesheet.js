@@ -8,14 +8,13 @@ $(document).ready(function() {
     
     $('#timesheet .add').live('click', function() {
         var line = $(this).parents('div:first');
-        var date = line.find('.date');
         var workPackage = line.find('.workPackage');
         var hours = line.find('.hours');
         
         $.ajax({
             type: 'POST',
             url: '/Timesheets/AddLine' + qs,
-            data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val(),
+            data: 'workPackage=' + workPackage.val() + '&hours=' + hours.val(),
             success: function(data) { $('#timesheet').html(data); }
         });
         
@@ -52,7 +51,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/Timesheets/EditLine/' + timeBlockId.val() + qs,
-            data: 'date=' + date.val() + '&workPackage=' + workPackage.val() + '&hours=' + hours.val(),
+            data: 'workPackage=' + workPackage.val() + '&hours=' + hours.val(),
             success: function(data) { $('#timesheet').html(data); }
         });
 

@@ -32,7 +32,7 @@ namespace StopWastingMyTime.Models
             from = from == null ? DateTime.MinValue : from;
             to = to == null ? DateTime.MaxValue : to;
             IEnumerable<Models.TimeBlock> data = Models.TimeBlock.SelectByUserId(userId);
-            data = data.Where(x => x.Date >= from && x.Date <= to);
+            data = data.Where(x => x.Date >= from && x.Date < to);
             return data.OrderBy(x => x.Date);
         }
 

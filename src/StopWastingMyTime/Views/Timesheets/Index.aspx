@@ -10,8 +10,7 @@
     
     <div id="filter">
         <% Html.BeginForm("Index", "Timesheets", FormMethod.Get); %>
-        <%= Html.TextBox("dateFrom", ViewData["dateFrom"]) %>
-        <%= Html.TextBox("dateTo", ViewData["dateTo"]) %>
+        <%= Html.TextBox("date") %>
         <input type="submit" value="Filter" />
         <% Html.EndForm(); %>
     </div>

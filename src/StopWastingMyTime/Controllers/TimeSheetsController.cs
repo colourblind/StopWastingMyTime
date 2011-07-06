@@ -8,53 +8,51 @@ namespace StopWastingMyTime.Controllers
 {
     public class TimeSheetsController : Controller
     {
-        public ActionResult Index(string dateFrom, string dateTo)
+        public ActionResult Index(string date)
         {
-            DateTime? from = ParseDate(dateFrom);
-            DateTime? to = ParseDate(dateTo);
-            from = (from == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Day, 1) : from);
-            return View(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, from, to));
+            DateTime d = ParseDate(date) ?? DateTime.Now;
+            d = new DateTime(d.Year, d.Month, d.Day);
+            return View(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, d, d.AddDays(1)));
         }
 
-        public ActionResult TimesheetList(string dateFrom, string dateTo)
+        public ActionResult TimesheetList(string date)
         {
-            DateTime? from = ParseDate(dateFrom);
-            DateTime? to = ParseDate(dateTo);
-            from = (from == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Day, 1) : from);
-            return PartialView(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, from, to));
+            DateTime d = ParseDate(date) ?? DateTime.Now;
+            d = new DateTime(d.Year, d.Month, d.Day);
+            return View(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, d, d.AddDays(1)));
         }
 
         [HttpPost]
-        public ActionResult AddLine(string dateFrom, string dateTo, FormCollection form)
+        public ActionResult AddLine(string date, FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock();
             timeBlock.TimeBlockId = Guid.NewGuid();
             timeBlock.UserId = User.Identity.Name;
             timeBlock.JobId = form["workPackage"];
-            timeBlock.Date = DateTime.Parse(form["date"]).Date;
+            timeBlock.Date = ParseDate(date) ?? DateTime.Now.Date;
             timeBlock.Time = Decimal.Parse(form["hours"]);
             timeBlock.Save();
 
-            return RedirectToAction("TimesheetList", new { dateFrom = dateFrom, dateTo = dateTo });
+            return RedirectToAction("TimesheetList", new { date = date });
         }
 
         [HttpPost]
-        public ActionResult EditLine(Guid id, string dateFrom, string dateTo, FormCollection form)
+        public ActionResult EditLine(Guid id, string date, FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock(id);
             if (timeBlock.UserId != User.Identity.Name)
                 return View();
 
             timeBlock.JobId = form["workPackage"];
-            timeBlock.Date = DateTime.Parse(form["date"]).Date;
+            timeBlock.Date = ParseDate(date) ?? DateTime.Now.Date;
             timeBlock.Time = Decimal.Parse(form["hours"]);
             timeBlock.Save();
 
-            return RedirectToAction("TimesheetList", new { dateFrom = dateFrom, dateTo = dateTo });
+            return RedirectToAction("TimesheetList", new { date = date });
         }
 
         [HttpPost]
-        public ActionResult RemoveLine(Guid id, string dateFrom, string dateTo, FormCollection form)
+        public ActionResult RemoveLine(Guid id, string date, FormCollection form)
         {
             Models.TimeBlock timeBlock = new Models.TimeBlock(id);
             if (timeBlock.UserId != User.Identity.Name)
@@ -62,7 +60,7 @@ namespace StopWastingMyTime.Controllers
 
             timeBlock.Delete();
 
-            return RedirectToAction("TimesheetList", new { dateFrom = dateFrom, dateTo = dateTo });
+            return RedirectToAction("TimesheetList", new { date = date });
         }
 
         private DateTime? ParseDate(string date)
