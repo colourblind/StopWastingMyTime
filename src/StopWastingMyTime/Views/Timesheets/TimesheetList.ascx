@@ -6,7 +6,7 @@
             <input type="text" class="workPackage" disabled="disabled" value="<%= Html.Encode(timeBlock.JobId) %>" />
             <input type="text" class="hours" disabled="disabled" value="<%= Html.Encode(timeBlock.Time) %>" />
             <a href="#" class="edit">Edit</a>
-            <a href="#" class="save" style="display: none;">Save</a>
+            <a href="#" class="save" style="display: none;">Save</a> |
             <a href="#" class="cancel" style="display: none;">Cancel</a>
             <a href="#" class="delete">Delete</a>
         </div>

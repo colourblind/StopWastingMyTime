@@ -22,11 +22,16 @@
             <td><%= Html.Encode(job.Client.Name) %></td>
             <td><%= Html.Encode(job.QuotedHours) %></td>
             <td><%= Html.Encode(job.Billable) %></th>
-            <td><%= Html.ActionLink("Edit", "Edit", new { id = job.JobId }) %> <%= Html.ActionLink("Delete", "Delete", new { id = job.JobId }) %></td>
+            <td>
+                <%= Html.ActionLink("Edit", "Edit", new { id = job.JobId }) %> |
+                <%= Html.ActionLink("Delete", "Delete", new { id = job.JobId }) %>
+            </td>
         </tr>
     <% } %>
     </table>
     
-    <%= Html.ActionLink("Create", "Create") %>
+    <p>
+    <%= Html.ActionLink("Create New", "Create") %>
+    </p>
 
 </asp:Content>

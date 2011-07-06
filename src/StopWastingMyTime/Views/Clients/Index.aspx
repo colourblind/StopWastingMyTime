@@ -10,33 +10,25 @@
 
     <table cellspacing="0">
         <tr>
+            <th>Name</th>
+            <th>Maintenance per Month</th>
             <th></th>
-            <th>
-                Name
-            </th>
-            <th>
-                Maintenance per Month
-            </th>
         </tr>
-
     <% foreach (var item in Model) { %>
-    
         <tr>
-            <td>
-                <%= Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id = item.ClientId })%> |
-                <%= Html.ActionLink("Delete", "Delete", new { id = item.ClientId })%>
-            </td>
             <td>
                 <%= Html.Encode(item.Name) %>
             </td>
             <td>
                 <%= Html.Encode(item.MaintenancePerMonth) %>
             </td>
+            <td>
+                <%= Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) %> |
+                <%= Html.ActionLink("Details", "Details", new { id = item.ClientId }) %> |
+                <%= Html.ActionLink("Delete", "Delete", new { id = item.ClientId }) %>
+            </td>
         </tr>
-    
     <% } %>
-
     </table>
 
     <p>
