@@ -24,6 +24,18 @@ div#header, div#footer
     padding: 1em 0 1em 0;
 }
 
+div#header
+{
+    background-image: -moz-linear-gradient(center top, #006 20%, #009 80%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.2, #006), color-stop(0.8, #009));
+}
+
+div#footer
+{
+    background-image: -moz-linear-gradient(center bottom, #006 0%, #009 80%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #006), color-stop(0.8, #009));
+}
+
 ul#menu
 {
     list-style: none;
@@ -58,6 +70,7 @@ div.centre
 
 input, select, textarea { border: 1px solid #ccc; margin: 2px; font-size: 1em; }
 .field-validation-error { color: #f00; }
+.display-label, .editor-label { font-weight: bold; }
 
 /* Stuff */
 
