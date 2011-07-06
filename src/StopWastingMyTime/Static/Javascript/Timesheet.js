@@ -83,5 +83,14 @@ $(document).ready(function() {
     
     $('#timesheet .workPackage').live('click', function() {
         $(this).autocomplete({ source: jobData, delay: 0 });
-    });    
+    });
+    
+    $('#timesheet input[type=text]').live('keypress', function(e) {
+        if ((e.keyCode || e.which) == 13)
+        {
+            $(this).siblings('.save').click();
+            $(this).siblings('.add').click();
+            return false;
+        }
+    });
 })
