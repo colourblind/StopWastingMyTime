@@ -10,6 +10,8 @@ namespace StopWastingMyTime.Controllers
     {
         public ActionResult Index(string date)
         {
+            if (String.IsNullOrEmpty(date))
+                return RedirectToAction("Index", new { date = DateTime.Now.ToString("dd/MM/yy") });
             DateTime d = ParseDate(date) ?? DateTime.Now;
             d = new DateTime(d.Year, d.Month, d.Day);
             return View(Models.TimeBlock.SelectByUserAndDateRange(User.Identity.Name, d, d.AddDays(1)));
