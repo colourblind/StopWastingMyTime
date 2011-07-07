@@ -103,7 +103,9 @@
   <ItemGroup>
     <Content Include="Static\Css\style.css" />
     <Content Include="Static\Javascript\Timesheet.js" />
+    <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Account\Login.aspx" />
+    <Content Include="Views\Account\Logout.aspx" />
     <Content Include="Views\Clients\Create.aspx" />
     <Content Include="Views\Clients\Delete.aspx" />
     <Content Include="Views\Clients\Details.aspx" />
