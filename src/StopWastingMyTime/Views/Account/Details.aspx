@@ -9,10 +9,11 @@
     <h2>User - <%= Html.Encode(User.Identity.Name) %></h2>
 
     <% using (Html.BeginForm()) { %>
-    <%= Html.ValidationSummary(false) %>
     <fieldset>
         <legend>Change Password</legend>
                 
+        <%= Html.ValidationSummary(false) %>
+
         <div class="editor-label">Password</div>
         <div class="editor-field"><%= Html.PasswordFor(x => x.Password)%></div>
         
