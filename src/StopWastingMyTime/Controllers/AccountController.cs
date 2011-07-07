@@ -9,11 +9,6 @@ namespace StopWastingMyTime.Controllers
 {
     public class AccountController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Login()
         {
             return View();
@@ -24,16 +19,37 @@ namespace StopWastingMyTime.Controllers
         {
             Models.User user = Models.User.Validate(username, password);
             if (user != null)
-            {
-                if (String.IsNullOrEmpty(returnUrl) || returnUrl == "/")
-                {
-                    FormsAuthentication.SetAuthCookie(user.UserId, false);
-                    return RedirectToAction("Index", "Timesheets");
-                }
-                else
-                    FormsAuthentication.RedirectFromLoginPage(user.UserId, false);
-            }
+                FormsAuthentication.RedirectFromLoginPage(user.UserId, false);
             
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return View();
+        }
+
+        public ActionResult Details()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Details(string password, string confirmPassword)
+        {
+            if (password != confirmPassword)
+                ModelState.AddModelError("Password", "The supplied passwords do not match");
+            if (password.Length < 6)
+                ModelState.AddModelError("Password", "Your password must be at least 6 characters");
+
+            if (ModelState.IsValid)
+            {
+                Models.User user = new Models.User(User.Identity.Name);
+                user.Password = Colourblind.Core.Security.GenerateHash(password);
+                user.Save();
+            }
+
             return View();
         }
     }
