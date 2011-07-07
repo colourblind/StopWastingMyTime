@@ -15,7 +15,7 @@ $(document).ready(function() {
             type: 'POST',
             url: '/Timesheets/AddLine' + qs,
             data: 'workPackage=' + workPackage.val() + '&hours=' + hours.val(),
-            success: function(data) { $('#timesheet').html(data); }
+            success: function(data) { $('#timesheet').html(data); $('a.add').siblings('.workPackage').autocomplete({ source: jobData, delay: 0 }).focus(); }
         });
         
         return false;
@@ -74,10 +74,6 @@ $(document).ready(function() {
         });
 
         return false;
-    });
-    
-    $('#timesheet .date').live('click', function() {
-        $(this).datepicker({ showOn: 'focus', dateFormat: 'dd/mm/yy' }).focus();
     });
     
     $('#timesheet .workPackage').live('click', function() {
