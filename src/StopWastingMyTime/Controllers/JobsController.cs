@@ -34,16 +34,18 @@ namespace StopWastingMyTime.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection form)
         {
-            if (!ValidateModel(form))
-            {
-                ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
-                return View();
-            }
+            ValidateModel(form);
 
             try
             {
                 Models.Job job = new Models.Job();
                 UpdateModel(job);
+
+                // Test this here rather than further up so we get the errors from update model even 
+                // if the manual validation fails
+                if (!ModelState.IsValid)
+                    throw new InvalidOperationException("Input failed model validation");
+
                 job.Save();
 
                 return RedirectToAction("Index");
@@ -65,11 +67,7 @@ namespace StopWastingMyTime.Controllers
         [HttpPost]
         public ActionResult Edit(string id, FormCollection form)
         {
-            if (!ValidateModel(form))
-            {
-                ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
-                return View();
-            }
+            ValidateModel(form);
 
             try
             {
@@ -80,6 +78,10 @@ namespace StopWastingMyTime.Controllers
                     // Cheesey cascade update
                     Models.Job newJob = new Models.Job();
                     UpdateModel(newJob);
+
+                    if (!ModelState.IsValid)
+                        throw new InvalidOperationException("Input failed model validation");
+
                     newJob.Save();
 
                     foreach (Models.TimeBlock timeBlock in Models.TimeBlock.SelectByJobId(id))
@@ -93,6 +95,8 @@ namespace StopWastingMyTime.Controllers
                 else
                 {
                     UpdateModel<Models.Job>(job);
+                    if (!ModelState.IsValid)
+                        throw new InvalidOperationException("Input failed model validation");
                     job.Save();
                 }
  

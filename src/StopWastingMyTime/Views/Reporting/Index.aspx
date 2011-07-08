@@ -13,7 +13,9 @@
     <%= Html.TextBox("fromDate", (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yy")) %>
     <%= Html.TextBox("toDate", (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yy")) %>
     
-    <input type="submit" value="Download" />
+    <p>
+    	<input type="submit" value="Download" />
+    </p>
     
     <% } %>
 

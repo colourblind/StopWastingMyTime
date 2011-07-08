@@ -28,8 +28,17 @@ namespace StopWastingMyTime.Controllers
         {
             try
             {
+                if (String.IsNullOrEmpty(form["Name"]))
+                    ModelState.AddModelError("Name", "The Name field is required");
+
                 Models.Client client = new Models.Client();
                 UpdateModel(client);
+
+                // Test this here rather than further up so we get the errors from update model even 
+                // if the manual validation fails
+                if (!ModelState.IsValid)
+                    throw new InvalidOperationException("Input failed model validation");
+
                 client.ClientId = Guid.NewGuid();
                 client.Save();
 
