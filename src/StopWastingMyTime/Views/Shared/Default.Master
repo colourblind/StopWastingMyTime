@@ -21,6 +21,7 @@
             <li><%= Html.ActionLink("Jobs", "Index", "Jobs") %></li>
             <li><%= Html.ActionLink("Timesheet", "Index", "Timesheets") %></li>
             <li><%= Html.ActionLink("Reporting", "Index", "Reporting") %></li>
+            <li><%= Html.ActionLink("Users", "Index", "Users") %></li>
         </ul>
     </div>
 </div>

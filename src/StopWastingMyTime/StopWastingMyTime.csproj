@@ -71,6 +71,7 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Controllers\TimeSheetsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -125,6 +126,11 @@
     <Content Include="Views\Timesheets\Index.aspx" />
     <Content Include="Views\Timesheets\RemoveLine.aspx" />
     <Content Include="Views\Timesheets\TimesheetList.ascx" />
+    <Content Include="Views\Users\Create.aspx" />
+    <Content Include="Views\Users\Delete.aspx" />
+    <Content Include="Views\Users\Details.aspx" />
+    <Content Include="Views\Users\Edit.aspx" />
+    <Content Include="Views\Users\Index.aspx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Colourblind.Core\Colourblind.Core.csproj">
