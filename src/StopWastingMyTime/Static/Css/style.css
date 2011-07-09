@@ -15,7 +15,7 @@ td { border-top: 1px solid #999; }
 th { text-align: left; }
 table { min-width: 50%; }
 fieldset { padding: 1em; }
-input[type=submit] { margin-left: 150px; }
+p input[type=submit] { margin-left: 150px; }
 
 /* Layout */
 

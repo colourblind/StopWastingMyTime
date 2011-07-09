@@ -9,15 +9,27 @@
     <h2>Login</h2>
     
     <% Html.BeginForm("Login", "Account", FormMethod.Post); %>
-
-        <label for="username">Username</label>
-        <%= Html.TextBox("username") %>
+    <fieldset>
+    
+        <div class="editor-label">
+            <label for="username">Username</label>
+        </div>
+        <div class="editor-field">
+            <%= Html.TextBox("username") %>
+        </div>
         
-        <label for="password">Password</label>
-        <%= Html.Password("password") %>
+        <div class="editor-label">
+            <label for="password">Password</label>
+        </div>
+        <div class="editor-field">
+            <%= Html.Password("password") %>
+        </div>
 
-        <input type="submit" value="Login" />
+        <p>
+            <input type="submit" value="Login" />
+        </p>
         
+    </fieldset>    
     <% Html.EndForm(); %>
     
 </asp:Content>
