@@ -20,6 +20,8 @@ namespace StopWastingMyTime.Controllers
             Models.User user = Models.User.Validate(username, password);
             if (user != null)
                 FormsAuthentication.RedirectFromLoginPage(user.UserId, false);
+            else
+                ModelState.AddModelError("Login", "Please check your details and try again");
             
             return View();
         }
