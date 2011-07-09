@@ -27,6 +27,7 @@ $(document).ready(function() {
         line.find('.cancel').show();
         line.find('.save').show();
         line.find('.delete').hide();
+        line.find('input.hours').focus();
         $(this).hide();
         return false;
     });
@@ -87,5 +88,7 @@ $(document).ready(function() {
             $(this).siblings('.add').click();
             return false;
         }
+        if ((e.keyCode || e.which) == 27)
+            $(this).siblings('.cancel').click();
     });
 })
