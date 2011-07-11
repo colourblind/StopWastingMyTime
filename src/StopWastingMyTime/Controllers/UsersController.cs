@@ -27,7 +27,7 @@ namespace StopWastingMyTime.Controllers
             try
             {
                 if (form["Password"] != form["ConfirmPassword"])
-                    ModelState.AddModelError("Password", "The supplied passwords do not match");
+                    ModelState.AddModelError("", "The supplied passwords do not match");
                 if (form["Password"].Length < 6)
                     ModelState.AddModelError("Password", "Your password must be at least 6 characters");
 
@@ -37,7 +37,6 @@ namespace StopWastingMyTime.Controllers
                 if (!ModelState.IsValid)
                     throw new InvalidOperationException("Input failed model validation");
 
-                user.Password = Security.GenerateHash(form["Password"]);
                 user.Save();
 
                 return RedirectToAction("Index");
@@ -58,10 +57,15 @@ namespace StopWastingMyTime.Controllers
         {
             try
             {
-                if (form["Password"] != form["ConfirmPassword"])
-                    ModelState.AddModelError("Password", "The supplied passwords do not match");
-                if (form["Password"].Length < 6)
-                    ModelState.AddModelError("Password", "Your password must be at least 6 characters");
+                // If the user leaves the password field blank, turn off the validation
+                // and let the model ignore the change
+                if (form["Password"].Length > 0)
+                {
+                    if (form["Password"] != form["ConfirmPassword"])
+                        ModelState.AddModelError("", "The supplied passwords do not match");
+                    if (form["Password"].Length < 6)
+                        ModelState.AddModelError("Password", "Your password must be at least 6 characters");
+                }
 
                 Models.User user = new Models.User(id);
                 UpdateModel(user);
@@ -69,7 +73,6 @@ namespace StopWastingMyTime.Controllers
                 if (!ModelState.IsValid)
                     throw new InvalidOperationException("Input failed model validation");
 
-                user.Password = Security.GenerateHash(form["Password"]);
                 user.Save();
  
                 return RedirectToAction("Index");

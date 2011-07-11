@@ -41,14 +41,14 @@ namespace StopWastingMyTime.Controllers
         public ActionResult Details(string password, string confirmPassword)
         {
             if (password != confirmPassword)
-                ModelState.AddModelError("Password", "The supplied passwords do not match");
+                ModelState.AddModelError("", "The supplied passwords do not match");
             if (password.Length < 6)
                 ModelState.AddModelError("Password", "Your password must be at least 6 characters");
 
             if (ModelState.IsValid)
             {
                 Models.User user = new Models.User(User.Identity.Name);
-                user.Password = Colourblind.Core.Security.GenerateHash(password);
+                user.Password = password;
                 user.Save();
             }
 

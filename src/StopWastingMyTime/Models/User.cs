@@ -24,6 +24,20 @@ namespace StopWastingMyTime.Models
 		
 		#endregion
 
+        #region Properties
+
+        public override string Password
+        {
+            set
+            {
+                // Ignore blank passwords (an UpdateModel hack disguised as a security feature!)
+                if (!String.IsNullOrEmpty(value))
+                    base.Password = Colourblind.Core.Security.GenerateHash(value);
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         public static User Validate(string username, string password)
