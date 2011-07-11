@@ -20,6 +20,7 @@ CREATE TABLE [dbo].[User](
 	[UserId] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
+    [Active] [bit] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC

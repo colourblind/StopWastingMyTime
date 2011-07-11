@@ -18,6 +18,7 @@ namespace StopWastingMyTime.Models.Data
         public string UserId;
         public string Password;
         public string Name;
+        public bool Active;
 
         #endregion
 
@@ -33,6 +34,7 @@ namespace StopWastingMyTime.Models.Data
             UserId = (string)data["UserId"];
             Password = (string)data["Password"];
             Name = (string)data["Name"];
+            Active = (bool)data["Active"];
         }
 
         #endregion
@@ -47,10 +49,11 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "User] ([UserId], [Password], [Name]) VALUES (@UserId, @Password, @Name)", connection);
+                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "User] ([UserId], [Password], [Name], [Active]) VALUES (@UserId, @Password, @Name, @Active)", connection);
                 command.Parameters.Add(new SqlParameter("UserId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(UserId)));
                 command.Parameters.Add(new SqlParameter("Password", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Password)));
                 command.Parameters.Add(new SqlParameter("Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Name)));
+                command.Parameters.Add(new SqlParameter("Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Active)));
                 command.ExecuteNonQuery();
                 
             }
@@ -78,9 +81,10 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "User] SET [UserId] = @UserId, [Password] = @Password, [Name] = @Name WHERE [UserId] = @UserId", connection);
+                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "User] SET [UserId] = @UserId, [Password] = @Password, [Name] = @Name, [Active] = @Active WHERE [UserId] = @UserId", connection);
                 command.Parameters.Add(new SqlParameter("Password", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Password)));
                 command.Parameters.Add(new SqlParameter("Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Name)));
+                command.Parameters.Add(new SqlParameter("Active", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Active)));
                 command.Parameters.Add(new SqlParameter("UserId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(UserId)));
                 command.ExecuteNonQuery();
             }

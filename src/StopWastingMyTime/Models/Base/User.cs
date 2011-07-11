@@ -20,6 +20,7 @@ namespace StopWastingMyTime.Models.Base
         private string _userId = String.Empty;
         private string _password = String.Empty;
         private string _name = String.Empty;
+        private bool _active;
 
 
         private List<StopWastingMyTime.Models.TimeBlock> _timeBlocks = null;
@@ -46,6 +47,12 @@ namespace StopWastingMyTime.Models.Base
         {
             get { return _name; }
             set { _name = value; }
+        }
+		
+        public virtual bool Active
+        {
+            get { return _active; }
+            set { _active = value; }
         }
 		
 
@@ -102,6 +109,7 @@ namespace StopWastingMyTime.Models.Base
                 _userId = dataObject.UserId;
                 _password = dataObject.Password;
                 _name = dataObject.Name;
+                _active = dataObject.Active;
 
                 _isNew = false;
             }
@@ -121,6 +129,7 @@ namespace StopWastingMyTime.Models.Base
             dataObject.UserId = _userId;
             dataObject.Password = _password;
             dataObject.Name = _name;
+            dataObject.Active = _active;
 
             if (IsNew)
                 dataObject.Insert();

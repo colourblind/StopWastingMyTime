@@ -45,6 +45,14 @@
                 <%= Html.ValidationMessageFor(model => model.Name) %>
             </div>
             
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Active) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.CheckBoxFor(model => model.Active) %>
+                <%= Html.ValidationMessageFor(model => model.Active) %>
+            </div>
+            
             <p>
                 <input type="submit" value="Save" />
             </p>

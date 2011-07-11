@@ -16,6 +16,9 @@
             <th>
                 Name
             </th>
+            <th>
+                Active
+            </th>
             <th></th>
         </tr>
 
@@ -27,6 +30,9 @@
             </td>
             <td>
                 <%= Html.Encode(item.Name) %>
+            </td>
+            <td>
+                <%= Html.Encode(item.Active) %>
             </td>
             <td>
                 <%= Html.ActionLink("Edit", "Edit", new { id = item.UserId }) %> |

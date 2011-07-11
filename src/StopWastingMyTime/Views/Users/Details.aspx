@@ -17,6 +17,9 @@
         <div class="display-label">Name</div>
         <div class="display-field"><%= Html.Encode(Model.Name) %></div>
         
+        <div class="display-label">Active</div>
+        <div class="display-field"><%= Html.Encode(Model.Active) %></div>
+        
     </fieldset>
     <p>
         <%= Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) %> |
