@@ -69,7 +69,7 @@ GO
 ALTER TABLE [dbo].[TimeBlock] CHECK CONSTRAINT [FK_TimeBlock_User]
 GO
 
-INSERT INTO [User] (UserId, Password, Name) VALUES ('admin', 'LQ4/uCiyHKMAL4i6shtWMcWiOuvz4Vs=', 'Admin')
+INSERT INTO [User] (UserId, Password, Name, Active) VALUES ('admin', 'LQ4/uCiyHKMAL4i6shtWMcWiOuvz4Vs=', 'Admin', 1)
 GO
 
 ROLLBACK TRAN -- Replace me with COMMIT TRAN to run!
