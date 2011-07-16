@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -136,6 +137,8 @@ namespace StopWastingMyTime.Controllers
                 ModelState.AddModelError("JobId", "Job ID is missing");
             if (String.IsNullOrEmpty(form["ClientId"]))
                 ModelState.AddModelError("ClientId", "Client is missing");
+            if (!Regex.IsMatch(form["JobId"], "^[0-9A-Za-z_-]+$"))
+                ModelState.AddModelError("JobId", "Job ID can only contain letters, numbers, underscores and dashes");
 
             return ModelState.IsValid;
         }
