@@ -28,7 +28,7 @@ namespace StopWastingMyTime.Controllers
 
         public ActionResult Create()
         {
-            ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name");
+            ViewData["ClientList"] = new SelectList(Models.Client.SelectAll().OrderBy(o => o.Name), "ClientId", "Name");
             return View();
         } 
 
@@ -61,7 +61,7 @@ namespace StopWastingMyTime.Controllers
         public ActionResult Edit(string id)
         {
             Models.Job job = new Models.Job(id);
-            ViewData["ClientList"] = new SelectList(Models.Client.SelectAll(), "ClientId", "Name", job.ClientId);
+            ViewData["ClientList"] = new SelectList(Models.Client.SelectAll().OrderBy(o => o.Name), "ClientId", "Name", job.ClientId);
             return View(job);
         }
 

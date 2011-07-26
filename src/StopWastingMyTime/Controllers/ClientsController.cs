@@ -10,7 +10,7 @@ namespace StopWastingMyTime.Controllers
     {
         public ActionResult Index()
         {
-            return View(Models.Client.SelectAll());
+            return View(Models.Client.SelectAll().OrderBy(o => o.Name));
         }
 
         public ActionResult Details(string id)
