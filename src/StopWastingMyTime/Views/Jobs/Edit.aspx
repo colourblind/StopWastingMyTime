@@ -45,6 +45,22 @@
                 <%= Html.ValidationMessageFor(model => model.Billable) %>
             </div>
             
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Description) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.TextAreaFor(model => model.Description) %>
+                <%= Html.ValidationMessageFor(model => model.Description)%>
+            </div>
+            
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.IsActive) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.CheckBoxFor(model => model.IsActive) %>
+                <%= Html.ValidationMessageFor(model => model.IsActive)%>
+            </div>
+            
             <p>
                 <input type="submit" value="Save" />
             </p>

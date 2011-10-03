@@ -33,6 +33,8 @@ CREATE TABLE [dbo].[Job](
 	[ClientId] [uniqueidentifier] NOT NULL,
 	[Billable] [bit] NOT NULL,
 	[QuotedHours] [decimal](6, 2) NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NOT NULL,
  CONSTRAINT [PK_Job] PRIMARY KEY CLUSTERED 
 (
 	[JobId] ASC

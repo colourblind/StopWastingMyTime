@@ -19,6 +19,8 @@ namespace StopWastingMyTime.Models.Data
         public Guid ClientId;
         public bool Billable;
         public decimal? QuotedHours;
+        public string Description;
+        public bool IsActive;
 
         #endregion
 
@@ -35,6 +37,8 @@ namespace StopWastingMyTime.Models.Data
             ClientId = (Guid)data["ClientId"];
             Billable = (bool)data["Billable"];
             QuotedHours = (decimal?)DataUtils.ConvertDbNulls(data["QuotedHours"]);
+            Description = (string)data["Description"];
+            IsActive = (bool)data["IsActive"];
         }
 
         #endregion
@@ -49,11 +53,13 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Job] ([JobId], [ClientId], [Billable], [QuotedHours]) VALUES (@JobId, @ClientId, @Billable, @QuotedHours)", connection);
+                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Job] ([JobId], [ClientId], [Billable], [QuotedHours], [Description], [IsActive]) VALUES (@JobId, @ClientId, @Billable, @QuotedHours, @Description, @IsActive)", connection);
                 command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
                 command.Parameters.Add(new SqlParameter("QuotedHours", SqlDbType.Decimal, 5, ParameterDirection.Input, true, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(QuotedHours)));
+                command.Parameters.Add(new SqlParameter("Description", SqlDbType.NVarChar, -1, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Description)));
+                command.Parameters.Add(new SqlParameter("IsActive", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(IsActive)));
                 command.ExecuteNonQuery();
                 
             }
@@ -81,10 +87,12 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Job] SET [JobId] = @JobId, [ClientId] = @ClientId, [Billable] = @Billable, [QuotedHours] = @QuotedHours WHERE [JobId] = @JobId", connection);
+                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Job] SET [JobId] = @JobId, [ClientId] = @ClientId, [Billable] = @Billable, [QuotedHours] = @QuotedHours, [Description] = @Description, [IsActive] = @IsActive WHERE [JobId] = @JobId", connection);
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
                 command.Parameters.Add(new SqlParameter("QuotedHours", SqlDbType.Decimal, 5, ParameterDirection.Input, true, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(QuotedHours)));
+                command.Parameters.Add(new SqlParameter("Description", SqlDbType.NVarChar, -1, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Description)));
+                command.Parameters.Add(new SqlParameter("IsActive", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(IsActive)));
                 command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
                 command.ExecuteNonQuery();
             }
