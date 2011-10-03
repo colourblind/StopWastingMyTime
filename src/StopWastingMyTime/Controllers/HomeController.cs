@@ -11,7 +11,6 @@ namespace StopWastingMyTime.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["MaintenanceReport"] = Models.Data.Reporting.MaintenanceReport(DateTime.Now);
             ViewData["MonthlyReport"] = Models.Data.Reporting.MonthlyReport();
             return View();
         }

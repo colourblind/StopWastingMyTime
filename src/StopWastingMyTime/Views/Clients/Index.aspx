@@ -11,16 +11,12 @@
     <table cellspacing="0">
         <tr>
             <th>Name</th>
-            <th>Maintenance per Month</th>
             <th></th>
         </tr>
     <% foreach (var item in Model) { %>
         <tr>
             <td>
                 <%= Html.Encode(item.Name) %>
-            </td>
-            <td>
-                <%= Html.Encode(item.MaintenancePerMonth) %>
             </td>
             <td>
                 <%= Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) %> |

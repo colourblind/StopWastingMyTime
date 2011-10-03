@@ -17,7 +17,6 @@ namespace StopWastingMyTime.Models.Data
 
         public Guid ClientId;
         public string Name;
-        public decimal MaintenancePerMonth;
 
         #endregion
 
@@ -32,7 +31,6 @@ namespace StopWastingMyTime.Models.Data
         {
             ClientId = (Guid)data["ClientId"];
             Name = (string)data["Name"];
-            MaintenancePerMonth = (decimal)data["MaintenancePerMonth"];
         }
 
         #endregion
@@ -47,10 +45,9 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Client] ([ClientId], [Name], [MaintenancePerMonth]) VALUES (@ClientId, @Name, @MaintenancePerMonth)", connection);
+                command = new SqlCommand("INSERT INTO [" + ConnectionFactory.TableNamePrefix + "Client] ([ClientId], [Name]) VALUES (@ClientId, @Name)", connection);
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Name)));
-                command.Parameters.Add(new SqlParameter("MaintenancePerMonth", SqlDbType.Decimal, 5, ParameterDirection.Input, false, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(MaintenancePerMonth)));
                 command.ExecuteNonQuery();
                 
             }
@@ -78,9 +75,8 @@ namespace StopWastingMyTime.Models.Data
             try
             {
                 connection = ConnectionFactory.GetConnection();
-                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Client] SET [ClientId] = @ClientId, [Name] = @Name, [MaintenancePerMonth] = @MaintenancePerMonth WHERE [ClientId] = @ClientId", connection);
+                command = new SqlCommand("UPDATE [" + ConnectionFactory.TableNamePrefix + "Client] SET [ClientId] = @ClientId, [Name] = @Name WHERE [ClientId] = @ClientId", connection);
                 command.Parameters.Add(new SqlParameter("Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Name)));
-                command.Parameters.Add(new SqlParameter("MaintenancePerMonth", SqlDbType.Decimal, 5, ParameterDirection.Input, false, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(MaintenancePerMonth)));
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.ExecuteNonQuery();
             }

@@ -19,7 +19,6 @@ namespace StopWastingMyTime.Models.Base
 
         private Guid _clientId = Guid.Empty;
         private string _name = String.Empty;
-        private decimal _maintenancePerMonth;
 
 
         private List<StopWastingMyTime.Models.Job> _jobs = null;
@@ -40,12 +39,6 @@ namespace StopWastingMyTime.Models.Base
         {
             get { return _name; }
             set { _name = value; }
-        }
-		
-        public virtual decimal MaintenancePerMonth
-        {
-            get { return _maintenancePerMonth; }
-            set { _maintenancePerMonth = value; }
         }
 		
 
@@ -101,7 +94,6 @@ namespace StopWastingMyTime.Models.Base
             {
                 _clientId = dataObject.ClientId;
                 _name = dataObject.Name;
-                _maintenancePerMonth = dataObject.MaintenancePerMonth;
 
                 _isNew = false;
             }
@@ -120,7 +112,6 @@ namespace StopWastingMyTime.Models.Base
 
             dataObject.ClientId = _clientId;
             dataObject.Name = _name;
-            dataObject.MaintenancePerMonth = _maintenancePerMonth;
 
             if (IsNew)
                 dataObject.Insert();

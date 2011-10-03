@@ -22,14 +22,6 @@
                 <%= Html.ValidationMessageFor(model => model.Name) %>
             </div>
             
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.MaintenancePerMonth) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.MaintenancePerMonth) %>
-                <%= Html.ValidationMessageFor(model => model.MaintenancePerMonth) %>
-            </div>
-            
             <p>
                 <input type="submit" value="Save" />
             </p>
