@@ -61,11 +61,10 @@ $(document).ready(function() {
     
     $('#timesheet .delete').live('click', function() {
         var line = $(this).parents('div:first')
-        var date = line.find('.date');
         var workPackage = line.find('.workPackage');
         var timeBlockId = line.find('.timeBlockId');
 
-        if (!confirm('Delete ' + workPackage.val() + ' from ' + date.val() + '?'))
+        if (!confirm('Delete ' + workPackage.val() + '?'))
             return false;
 
         $.ajax({
