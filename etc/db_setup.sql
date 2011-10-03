@@ -8,7 +8,6 @@ GO
 CREATE TABLE [dbo].[Client](
 	[ClientId] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Client_ClientId]  DEFAULT (newid()),
 	[Name] [nvarchar](100) NOT NULL,
-	[MaintenancePerMonth] [decimal](6, 2) NOT NULL CONSTRAINT [DF_Client_MaintenancePerMonth]  DEFAULT ((0)),
  CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED 
 (
 	[ClientId] ASC
