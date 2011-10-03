@@ -2,7 +2,7 @@ body
 {
     margin: 0;
     font-family: Tahoma, Helvetica, Sans-Serif;
-    font-size: 11px;
+    font-size: 14px;
     background-color: #006;
 }
 
@@ -15,7 +15,7 @@ td { border-top: 1px solid #999; }
 th { text-align: left; }
 table { min-width: 50%; }
 fieldset { padding: 1em; }
-p input[type=submit] { margin-left: 150px; }
+p input[type=submit] { margin-left: 14em; }
 
 /* Layout */
 
@@ -54,6 +54,13 @@ ul#menu li
 ul#menu a { color: #99f; font-weight: bold; }
 ul#menu a:hover { color: #fff; }
 
+ul#textSize a { color: #99f; font-weight: bold; }
+ul#textSize a:hover { color: #fff; }
+ul#textSize { list-style: none; margin: 0; padding: 0; }
+ul#textSize li { float: left; padding: 0 12px 0 0; }
+ul#textSize .smaller { font-size: 0.8em; }
+ul#textSize .larger { font-size: 1.4em; }
+
 div#mainContent
 {
     background-color: #fff;
@@ -73,7 +80,7 @@ div.centre
 input, select, textarea { border: 1px solid #ccc; margin: 2px; font-size: 1em; }
 .field-validation-error, .validation-summary-errors { color: #f00; }
 .validation-summary-errors ul { list-style: none; padding-left: 0; }
-.display-label, .editor-label { font-weight: bold; width: 150px; margin-bottom: 1em; float: left; clear: left; }
+.display-label, .editor-label { font-weight: bold; width: 14em; margin-bottom: 1em; float: left; clear: left; }
 .display-field, .editor-field { float: left; }
 fieldset p { clear: left; }
 

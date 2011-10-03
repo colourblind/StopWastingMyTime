@@ -8,6 +8,7 @@
     <link href="../../Static/Css/smoothness/jquery-ui-1.8.13.custom.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Static/Javascript/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="../../Static/Javascript/jquery-ui-1.8.13.custom.min.js"></script>
+    <script type="text/javascript" src="../../Static/Javascript/General.js"></script>
 </head>
 
 <body>
@@ -29,6 +30,7 @@
 
 <div id="mainContent">
     <div class="centre">
+        <div id="messages"><%= ViewData["Messages"] == null ? String.Empty : ViewData["Messages"] %></div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </div>
 </div>
@@ -36,6 +38,11 @@
 <div id="footer">
     <div class="centre">
         <p>Powered by Win and Bacon</p>
+        <ul id="textSize">
+            <li class="smaller"><a href="#" onclick="UpdateTextSize(-1); return false;">smaller text</a></li>
+            <li><a href="#" onclick="ResetTextSize(); return false;">reset</a></li>
+            <li class="larger"><a href="#" onclick="UpdateTextSize(1); return false;">bigger text</a></li>
+        </ul>
     </div>
 </div>
 
