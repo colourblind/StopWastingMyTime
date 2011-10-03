@@ -17,7 +17,7 @@ namespace StopWastingMyTime.Controllers
         public ActionResult List(string term)
         {
             term = term.ToLower();
-            return PartialView(Models.Job.SelectAll().Where(x => x.JobId.ToLower().StartsWith(term)));
+            return PartialView(Models.Job.SelectAll().Where(x => x.IsActive && x.JobId.ToLower().StartsWith(term)));
         }
 
         public ActionResult Details(string id)
