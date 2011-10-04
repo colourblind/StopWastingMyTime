@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,6 +15,16 @@ namespace StopWastingMyTime.Controllers
     {
         public ActionResult Index()
         {
+            UrlHelper urlHelper = new UrlHelper(ControllerContext.RequestContext);
+            List<JobViewData> data = new List<JobViewData>();
+            Models.Job.SelectAll().ForEach(o => data.Add(new JobViewData(o, urlHelper)));
+
+            // How very . . . Javaesque . . .
+            DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(IEnumerable<JobViewData>));
+            MemoryStream stream = new MemoryStream();
+            serialiser.WriteObject(stream, data);
+            ViewData["JobsJson"] = Encoding.UTF8.GetString(stream.ToArray());
+
             return View(Models.Job.SelectAll());
         }
 
@@ -141,6 +155,40 @@ namespace StopWastingMyTime.Controllers
                 ModelState.AddModelError("JobId", "Job ID can only contain letters, numbers, underscores and dashes");
 
             return ModelState.IsValid;
+        }
+
+        [DataContract]
+        private class JobViewData
+        {
+            [DataMember]
+            public string JobId;
+            [DataMember]
+            public string ClientName;
+            [DataMember]
+            public bool IsActive;
+            [DataMember]
+            public bool IsBillable;
+            [DataMember]
+            public decimal? QuotedHours;
+            [DataMember]
+            public string Description;
+            [DataMember]
+            public string EditLink;
+            [DataMember]
+            public string DeleteLink;
+
+            public JobViewData(Models.Job job, UrlHelper urlHelper)
+            {
+                JobId = job.JobId;
+                ClientName = job.Client.Name;
+                IsActive = job.IsActive;
+                IsBillable = job.Billable;
+                QuotedHours = job.QuotedHours;
+                Description = job.Description;
+
+                EditLink = urlHelper.Action("Edit", new { id = job.JobId });
+                DeleteLink = urlHelper.Action("Delete", new { id = job.JobId });
+            }
         }
     }
 }
