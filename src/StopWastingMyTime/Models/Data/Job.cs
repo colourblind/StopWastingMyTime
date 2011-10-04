@@ -37,7 +37,7 @@ namespace StopWastingMyTime.Models.Data
             ClientId = (Guid)data["ClientId"];
             Billable = (bool)data["Billable"];
             QuotedHours = (decimal?)DataUtils.ConvertDbNulls(data["QuotedHours"]);
-            Description = (string)data["Description"];
+            Description = (string)DataUtils.ConvertDbNulls(data["Description"]);
             IsActive = (bool)data["IsActive"];
         }
 
@@ -58,7 +58,7 @@ namespace StopWastingMyTime.Models.Data
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
                 command.Parameters.Add(new SqlParameter("QuotedHours", SqlDbType.Decimal, 5, ParameterDirection.Input, true, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(QuotedHours)));
-                command.Parameters.Add(new SqlParameter("Description", SqlDbType.NVarChar, -1, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Description)));
+                command.Parameters.Add(new SqlParameter("Description", SqlDbType.NVarChar, -1, ParameterDirection.Input, true, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Description)));
                 command.Parameters.Add(new SqlParameter("IsActive", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(IsActive)));
                 command.ExecuteNonQuery();
                 
@@ -91,7 +91,7 @@ namespace StopWastingMyTime.Models.Data
                 command.Parameters.Add(new SqlParameter("ClientId", SqlDbType.UniqueIdentifier, 16, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(ClientId)));
                 command.Parameters.Add(new SqlParameter("Billable", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Billable)));
                 command.Parameters.Add(new SqlParameter("QuotedHours", SqlDbType.Decimal, 5, ParameterDirection.Input, true, 6, 2, null, DataRowVersion.Current, DataUtils.HandleNullables(QuotedHours)));
-                command.Parameters.Add(new SqlParameter("Description", SqlDbType.NVarChar, -1, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Description)));
+                command.Parameters.Add(new SqlParameter("Description", SqlDbType.NVarChar, -1, ParameterDirection.Input, true, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(Description)));
                 command.Parameters.Add(new SqlParameter("IsActive", SqlDbType.Bit, 1, ParameterDirection.Input, false, 1, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(IsActive)));
                 command.Parameters.Add(new SqlParameter("JobId", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, DataUtils.HandleNullables(JobId)));
                 command.ExecuteNonQuery();
