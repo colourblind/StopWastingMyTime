@@ -42,18 +42,19 @@ namespace StopWastingMyTime.Models.Data
         private const string MONTHLY_SQL =
 @"
 SELECT
+    c.[Name] AS [Client],
     j.JobId AS [Job], 
     j.QuotedHours AS [Quoted Hours], 
     j.Billable AS [Billable], SUM(t.[Time]) AS [Total Hours], 
-    CONVERT(bit, CASE WHEN j.QuotedHours IS NOT NULL AND SUM(t.[Time]) > j.QuotedHours THEN 1 ELSE 0 END) AS [Overrun]
+    CONVERT(bit, CASE WHEN j.QuotedHours IS NOT NULL AND j.QuotedHours > 0 AND SUM(t.[Time]) > j.QuotedHours THEN 1 ELSE 0 END) AS [Overrun]
 FROM
     [TimeBlock] t
     INNER JOIN [Job] j ON t.JobId = j.JobId
+    INNER JOIN [Client] c ON j.ClientId = c.ClientId
 WHERE
-    j.QuotedHours IS NOT NULL
-    AND j.QuotedHours > 0
+    j.IsActive = 1
 GROUP BY
-    j.JobId, j.QuotedHours, j.Billable
+    j.JobId, c.Name, j.QuotedHours, j.Billable
 ";
 
         #endregion
