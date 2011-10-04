@@ -11,7 +11,7 @@
     <div id="filter">
         <% Html.BeginForm("Index", "Timesheets", FormMethod.Get); %>
         <%= Html.TextBox("date") %>
-        <input type="submit" value="Filter" />
+        <input type="submit" value="Change date" />
         <% Html.EndForm(); %>
     </div>
     

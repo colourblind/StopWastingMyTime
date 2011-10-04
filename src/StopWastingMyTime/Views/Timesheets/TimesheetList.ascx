@@ -1,4 +1,8 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<StopWastingMyTime.Models.TimeBlock>>" %>
+        <div>
+            <label>Job</label>
+            <label>Hours</label>
+        </div>
     <% foreach (var timeBlock in Model) { %>
         <div>
             <input type="hidden" class="timeBlockId" value="<%= Html.Encode(timeBlock.TimeBlockId) %>" />
