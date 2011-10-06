@@ -11,6 +11,7 @@
     <script type="text/javascript" src="../../Static/Javascript/jquery-ui-1.8.13.custom.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>    
     <script type="text/javascript" src="../../Static/Javascript/General.js"></script>
+    <script type="text/javascript" src="../../Static/Javascript/Actions.js"></script>
     <script type="text/javascript" src="../../Static/Javascript/DataContainer.js"></script>
 </head>
 

@@ -10,20 +10,11 @@
     
     <% using (Html.BeginForm()) { %>
 
-    <%= Html.TextBox("fromDate", (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yy")) %>
-    <%= Html.TextBox("toDate", (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yy")) %>
+    <%= Html.TextBox("fromDate", (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yy"), new { @class = "date" }) %> to
+    <%= Html.TextBox("toDate", (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yy"), new { @class = "date" }) %>
     
     <input type="submit" value="Download" />
     
     <% } %>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-    $('input[name="fromDate"]').datepicker({ showOn: 'focus', dateFormat: 'dd/mm/yy' });
-    $('input[name="toDate"]').datepicker({ showOn: 'focus', dateFormat: 'dd/mm/yy' });
-});
-
-</script>
 
 </asp:Content>

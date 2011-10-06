@@ -8,9 +8,9 @@
 
     <h2>Timesheet</h2>
     
-    <div id="filter">
+    <div class="filter">
         <% Html.BeginForm("Index", "Timesheets", FormMethod.Get); %>
-        <%= Html.TextBox("date") %>
+        <%= Html.TextBox("date", null, new { @class = "date" }) %>
         <input type="submit" value="Change date" />
         <% Html.EndForm(); %>
     </div>
@@ -20,12 +20,5 @@
     </div>
         
     <script type="text/javascript" src="/Static/Javascript/Timesheet.js"></script>
-    <script type="text/javascript">
-    
-    $(document).ready(function() {
-        $('#filter input[type=text]').datepicker({ showOn: 'focus', dateFormat: 'dd/mm/yy' });
-    });
-    
-    </script>
     
 </asp:Content>

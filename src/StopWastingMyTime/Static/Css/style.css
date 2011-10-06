@@ -86,7 +86,7 @@ fieldset p { clear: left; }
 
 /* Timesheet page */
 
-#filter
+.filter
 {
     margin-bottom: 1em;
 }

@@ -110,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Static\Css\style.css" />
+    <Content Include="Static\Javascript\Actions.js" />
+    <Content Include="Static\Javascript\DataContainer.js" />
+    <Content Include="Static\Javascript\General.js" />
     <Content Include="Static\Javascript\Timesheet.js" />
     <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Account\Login.aspx" />
