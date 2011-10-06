@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace StopWastingMyTime.Controllers
+{
+    [HandleError]
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewData["MonthlyReport"] = Models.Data.Reporting.MonthlyReport();
+            return View();
+        }
+
+        public ActionResult Test()
+        {
+            DateTime from = DateTime.MinValue;
+            DateTime to = DateTime.MaxValue;
+
+            NPOI.SS.UserModel.Workbook workbook = new NPOI.HSSF.UserModel.HSSFWorkbook();
+            ExcelReporter.Write(workbook, null,  Models.Data.Reporting.MonthlyReport());
+            workbook.Write(new System.IO.FileStream("test.xls", System.IO.FileMode.Create));
+            workbook.Dispose();
+
+            return View();
+        }
+    }
+}
