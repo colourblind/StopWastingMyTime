@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Default.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<StopWastingMyTime.Models.Job>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Jobs - Stop Wasting My Time
+	Jobs
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -56,7 +56,7 @@
 
 <script type="text/javascript">
 var data = <%= ViewData["JobsJson"] %>;
-var dataSet = new DataContainer(data, 4);
+var dataSet = new DataContainer(data, 20);
 dataSet.update = function() 
 {
     $('#jobData tr').slice(1).remove();
