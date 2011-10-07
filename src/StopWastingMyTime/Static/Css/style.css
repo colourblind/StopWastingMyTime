@@ -111,6 +111,22 @@ tr.clickable { cursor: pointer; }
 tr.clickable:hover { background-color: #eee; }
 tr.clickable.overrun:hover { background-color: #fbb; }
 
+td.actions { width: 85px; }
+td.actions a.details, td.actions a.edit, td.actions a.delete
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-indent: -6667px;
+    overflow: hidden;
+    padding-left: 6px;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+td.actions a.details { background-image: url(../Images/page.png); }
+td.actions a.edit { background-image: url(../Images/page_edit.png); }
+td.actions a.delete { background-image: url(../Images/page_delete.png); }
+
 /* Data display */
 
 ul.pages

@@ -46,10 +46,12 @@
             <td>${ClientName}</td>
             <td>${Description}</td>
             <td>${QuotedHours}</td>
-            <td>${IsBillable}</th>
-            <td>${IsActive}</th>
-            <td>
-                <a href="${EditLink}">Edit</a>&nbsp;|&nbsp;<a href="${DetailsLink}">Details</a>&nbsp;|&nbsp;<a href="${DeleteLink}">Delete</a>
+            <td>${IsBillable}</td>
+            <td>${IsActive}</td>
+            <td class="actions">
+                <a class="details" title="Details" href="${DetailsLink}">Details</a>
+                <a class="edit" title="Edit" href="${EditLink}">Edit</a>
+                <a class="delete" title="Delete" href="${DeleteLink}">Delete</a>
             </td>
         </tr>
 </script>

@@ -34,10 +34,10 @@
             <td>
                 <%= Html.Encode(item.Active) %>
             </td>
-            <td>
-                <%= Html.ActionLink("Edit", "Edit", new { id = item.UserId }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id = item.UserId })%> |
-                <%= Html.ActionLink("Delete", "Delete", new { id = item.UserId })%>
+            <td class="actions">
+                <%= Html.ActionLink("Details", "Details", new { id = item.UserId }, new { @class = "details", title = "Details" })%>
+                <%= Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "edit", title = "Edit" })%>
+                <%= Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { @class = "delete", title = "Delete" })%>
             </td>
         </tr>
     

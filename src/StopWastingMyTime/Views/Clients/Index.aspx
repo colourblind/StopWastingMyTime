@@ -18,10 +18,10 @@
             <td>
                 <%= Html.Encode(item.Name) %>
             </td>
-            <td>
-                <%= Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id = item.ClientId }) %> |
-                <%= Html.ActionLink("Delete", "Delete", new { id = item.ClientId }) %>
+            <td class="actions">
+                <%= Html.ActionLink("Details", "Details", new { id = item.ClientId }, new { @class = "details", title = "Details" })%>
+                <%= Html.ActionLink("Edit", "Edit", new { id = item.ClientId }, new { @class = "edit", title = "Edit" })%>
+                <%= Html.ActionLink("Delete", "Delete", new { id = item.ClientId }, new { @class = "delete", title = "Delete" })%>
             </td>
         </tr>
     <% } %>
