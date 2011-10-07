@@ -14,6 +14,24 @@
         <div class="display-label">Name</div>
         <div class="display-field"><%= Html.Encode(Model.Name) %></div>
         
+        <div class="display-label">Jobs</div>
+        <table cellspacing="0">
+            <tr>
+                <th>JobId</th>
+                <th>Description</th>
+                <th>Quoted Hours</th>
+                <th>Total Hours</th>
+            </tr>
+        <% foreach (StopWastingMyTime.Models.Job j in Model.Jobs) { %>
+            <tr>
+                <td><%= Html.ActionLink(j.JobId, "Details", "Jobs", new { id = j.JobId }, null) %></td>
+                <td><%= Html.Encode(j.Description) %></td>
+                <td><%= Html.Encode(j.QuotedHours) %></td>
+                <td><%= Html.Encode(j.TotalHours) %></td>
+            </tr>
+        <% } %>
+        </table>
+        
     </fieldset>
     <p>
         <%= Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) %> |

@@ -34,16 +34,19 @@
             <tr>
                 <th>User</th>
                 <th>Date</th>
+                <th>Comment</th>
                 <th>Hours</th>
             </tr>
         <% foreach (StopWastingMyTime.Models.TimeBlock t in Model.TimeBlocks) { %>
             <tr>
                 <td><%= Html.Encode(t.User.Name) %></td>
                 <td><%= Html.Encode(t.Date) %></td>
+                <td><%= Html.Encode(t.Comment) %></td>
                 <td><%= Html.Encode(t.Time) %></td>
             </tr>
         <% } %>
             <tr>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th><%= Model.TotalHours %></th>
