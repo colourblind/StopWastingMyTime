@@ -26,7 +26,7 @@
     </thead>
     <tbody>
     <% foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewData["MonthlyReport"]).Rows) { %>
-        <tr>
+        <tr class="clickable" onclick="window.location = '<%= Url.Action("Details", "Jobs", new { id = row["Job"] }) %>';">
             <% foreach (var cell in row.ItemArray) {%>
                 <td><%= cell.ToString() %></td>
             <% } %>

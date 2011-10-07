@@ -124,6 +124,7 @@
     <Content Include="Views\Clients\Index.aspx" />
     <Content Include="Views\Jobs\Create.aspx" />
     <Content Include="Views\Jobs\Delete.aspx" />
+    <Content Include="Views\Jobs\Details.aspx" />
     <Content Include="Views\Jobs\Index.aspx" />
     <Content Include="Views\Jobs\List.ascx" />
     <Content Include="Views\Jobs\Edit.aspx">
