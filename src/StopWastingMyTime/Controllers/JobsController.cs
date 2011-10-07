@@ -173,6 +173,8 @@ namespace StopWastingMyTime.Controllers
             [DataMember]
             public string Description;
             [DataMember]
+            public decimal TotalHours;
+            [DataMember]
             public string EditLink;
             [DataMember]
             public string DetailsLink;
@@ -187,6 +189,7 @@ namespace StopWastingMyTime.Controllers
                 IsBillable = job.Billable;
                 QuotedHours = job.QuotedHours;
                 Description = job.Description;
+                TotalHours = job.TotalHours;
 
                 EditLink = urlHelper.Action("Edit", new { id = job.JobId });
                 DetailsLink = urlHelper.Action("Details", new { id = job.JobId });
