@@ -1,41 +1,70 @@
 body
 {
     margin: 0;
-    font-family: Tahoma, Helvetica, Sans-Serif;
+    font-family: Segoe UI, Tahoma, Helvetica, Sans-Serif;
     font-size: 14px;
-    background-color: #006;
+    background-color: #ccd;
 }
 
 /* General */
 
+*
+{
+    -moz-transition-property: color, background;
+    -moz-transition-duration: 0.4s;
+}
 div { margin: 0; }
-a { text-decoration: none; }
+h2 { color: #999; }
+a { text-decoration: none; color: #7777FF; }
+a:hover { color: #333; }
 td, th { padding: 2px 6px; }
 td { border-top: 1px solid #999; }
 th { text-align: left; }
 table { width: 100%; }
-fieldset { padding: 1em; }
-p input[type=submit] { margin-left: 14em; }
+fieldset { padding: 1em; border: 1px solid #999; }
+input[type=submit], input[type=button]
+{
+    color: #333;
+    padding: 0x 8px;
+    background-image: -moz-linear-gradient(center bottom, #e0e0f0 20%, #f0f0ff 80%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #e0e0f0), color-stop(0.8, #f0f0ff));
+}
+input:hover, input:focus
+{
+    background-image: -moz-linear-gradient(center bottom, #eee 20%, #fff 80%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #eee), color-stop(0.8, #fff));
+}
+input[type=submit]:hover, input[type=button]:hover
+{
+    background-image: -moz-linear-gradient(center bottom, #d0d0e0 20%, #e0e0f0 80%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #d0d0e0), color-stop(0.8, #e0e0f0));
+}
 
 /* Layout */
 
-div#header, div#footer
+div#header, div#footer { background-color: #ccd; }
+div#footer { padding: 1em 0; }
+div#header { padding: 0 0 1em 0; }
+
+div#header h1
 {
-    background-color: #006;
     color: #fff;
-    padding: 1em 0 1em 0;
+    text-shadow: 2px 2px 2px #336;
 }
 
 div#header
 {
-    background-image: -moz-linear-gradient(center top, #006 20%, #009 80%);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.2, #006), color-stop(0.8, #009));
+    background-image: -moz-linear-gradient(center top, #ccd 20%, #dde 80%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.2, #ccd), color-stop(0.8, #dde));
+    border-bottom: solid 1px #aaa;
 }
 
 div#footer
 {
-    background-image: -moz-linear-gradient(center bottom, #006 0%, #009 80%);
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #006), color-stop(0.8, #009));
+    color: #666;
+    background-image: -moz-linear-gradient(center bottom, #ccd 0%, #dde 80%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ccd), color-stop(0.8, #dde));
+    border-top: solid 1px #aaa;
 }
 
 ul#menu
@@ -51,7 +80,12 @@ ul#menu li
     padding-right: 2em;
 }
 
-ul#menu a { color: #99f; font-weight: bold; }
+ul#menu a
+{
+    color: #77f; 
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #aaa;
+}
 ul#menu a:hover { color: #fff; }
 
 ul#textSize a { color: #99f; font-weight: bold; }
@@ -63,8 +97,8 @@ ul#textSize .larger { font-size: 1.4em; }
 
 div#mainContent
 {
+    color: #666;
     background-color: #fff;
-    color: #000;
     padding: 1em 0 1em 0;
     min-height: 300px;
 }
@@ -77,12 +111,14 @@ div.centre
 
 /* Forms */
 
-input, select, textarea { border: 1px solid #ccc; margin: 2px; font-size: 1em; }
+input, select, textarea { border: 1px solid #ccc; margin: 2px; font-size: 1em; color: #666; }
+textarea { font-family: Segoe UI, Tahoma, Helvetica, Sans-Serif; width: 25em; height: 7em; }
 .field-validation-error, .validation-summary-errors { color: #f00; }
 .validation-summary-errors ul { list-style: none; padding-left: 0; }
-.display-label, .editor-label { font-weight: bold; width: 14em; margin-bottom: 1em; float: left; clear: left; }
+.display-label, .editor-label { font-weight: bold; width: 10em; margin-bottom: 1em; float: left; clear: left; }
 .display-field, .editor-field { float: left; }
 fieldset p { clear: left; }
+p input[type=submit] { margin-left: 10em; }
 
 /* Timesheet page */
 
@@ -91,15 +127,9 @@ fieldset p { clear: left; }
     margin-bottom: 1em;
 }
 
-#timesheet input
-{   
-    width: 12em;
-}
-
-#timesheet input.comment
-{   
-    width: 20em;
-}
+#timesheet input.workPackage { width: 12em; }
+#timesheet input.hours { width: 4em; }
+#timesheet input.comment { width: 20em; }
 
 #timesheet label
 {

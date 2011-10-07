@@ -41,7 +41,7 @@
 
 <div id="footer">
     <div class="centre">
-        <p>Powered by Win and Bacon</p>
+        <p>Powered by Win and Bacon. <a href="https://github.com/colourblind/StopWastingMyTime">(Just kidding)</a></p>
         <ul id="textSize">
             <li class="smaller"><a href="#" onclick="UpdateTextSize(-1); return false;">smaller text</a></li>
             <li><a href="#" onclick="ResetTextSize(); return false;">reset</a></li>
