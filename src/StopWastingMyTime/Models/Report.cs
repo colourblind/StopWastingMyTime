@@ -7,7 +7,7 @@ using NPOI.SS.UserModel;
 
 namespace StopWastingMyTime.Models
 {
-    public class Report
+    public abstract class Report
     {
         public DateTime FromDate
         {
@@ -27,7 +27,17 @@ namespace StopWastingMyTime.Models
             ToDate = to;
         }
         
-        public void Write(Stream outStream)
+        public abstract void Write(Stream outStream);
+    }
+
+    public class ByUserReport : Report
+    {
+        public ByUserReport(DateTime from, DateTime to) : base(from, to)
+        {
+
+        }
+
+        public override void Write(Stream outStream)
         {
             Workbook workbook = new HSSFWorkbook();
 

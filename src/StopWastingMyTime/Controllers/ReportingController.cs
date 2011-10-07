@@ -19,11 +19,11 @@ namespace StopWastingMyTime.Controllers
             DateTime to = DateTime.Parse(toDate);
 
             Stream stream = new MemoryStream();
-            Models.Report report = new Models.Report(from, to.AddDays(1));
+            Models.Report report = new Models.ByUserReport(from, to.AddDays(1));
             report.Write(stream);
             stream.Seek(0, SeekOrigin.Begin);
             FileStreamResult result = new FileStreamResult(stream, "application/excel");
-            result.FileDownloadName = String.Format("timesheet_{0}_{1}.xls", from.ToString("yyyyMMdd"), to.ToString("yyyyMMdd"));
+            result.FileDownloadName = String.Format("timesheetByUser_{0}_{1}.xls", from.ToString("yyyyMMdd"), to.ToString("yyyyMMdd"));
             return result;
         }
     }
