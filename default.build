@@ -1,88 +1,88 @@
 <?xml version="1.0"?>
 <project name="StopWastingMyTime" basedir=".">
-	
-	<property name="nant.settings.currentframework" value="net-3.5" />
-	<property name="debug" value="true" />	
-	<property name="buildDate" value="" />
 
-	<target name="build">
-		<csc target="library" output="build/lib/Colourblind.Core.dll" debug="${debug}">
-			<sources>
-				<include name="src/Colourblind.Core/**/*.cs" />
-			</sources>
-		</csc>
+    <property name="nant.settings.currentframework" value="net-3.5" />
+    <property name="debug" value="true" />	
+    <property name="buildDate" value="" />
 
-		<csc target="library" output="build/StopWastingMyTime/bin/StopWastingMyTime.dll" debug="${debug}">
-			<sources>
-				<include name="src/StopWastingMyTime/**/*.cs" />
-			</sources>
-			<references>
-				<include name="build/lib/Colourblind.Core.dll" />
-				<include name="lib/*.dll" />
-			</references>
-		</csc>
-	</target>
-	
-	<target name="copyWeb">
-		<copy todir="build/StopWastingMyTime/bin">
-			<fileset basedir="build/lib">
-				<include name="**/*.dll" />
-				<include name="**/*.pdb" />
-				<include name="**/*.xml" />
-			</fileset>
-		</copy>
-		<copy todir="build/StopWastingMyTime/bin">
-		<fileset basedir="lib">
-				<include name="**/*.dll" />
-				<include name="**/*.pdb" />
-				<include name="**/*.xml" />
-			</fileset>
-		</copy>
-	
-		<copy todir="build/StopWastingMyTime">
-			<fileset basedir="src/StopWastingMyTime">
-				<include name="**/*.aspx" />
-				<include name="**/*.ascx" />
-				<include name="**/*.asax" />
-				<include name="**/*.asmx" />
-				<include name="**/*.ashx" />
-				<include name="**/*.pdf" />
-				<include name="**/*.skin" />
-				<include name="**/*.css" />
-				<include name="**/*.gif" />
-				<include name="**/*.jpg" />
-				<include name="**/*.jpeg" />
-				<include name="**/*.png" />
-				<include name="**/*.swf" />
-				<include name="**/*.js" />
-				<include name="**/*.htm" />
-				<include name="**/*.html" />
-				<include name="**/*.Master" />
-				<include name="**/*.mov" />
-				<include name="**/*.browser" />
-				<include name="**/*.xml" />
-			</fileset>
-		</copy>
-	</target>
-	
-	<target name="init">
-		<delete>
-			<fileset basedir="build">
-				<include name="**/" />
-				<exclude name="*.zip" />
-			</fileset>
-		</delete>
-	</target>
-	
-	<target name="zip">
-		<tstamp property="buildDate" pattern="yyyyMMddHHmm" verbose="true" />
-		<zip zipfile="build/StopWastingMyTime-${buildDate}.zip">
-		    <fileset basedir="build">
-		        <include name="StopWastingMyTime/**/*" />
-		    </fileset>
-		</zip>
-	</target>
+    <target name="build">
+        <csc target="library" output="build/lib/Colourblind.Core.dll" debug="${debug}">
+            <sources>
+                <include name="src/Colourblind.Core/**/*.cs" />
+            </sources>
+        </csc>
 
-	<target name="deploy" depends="init, build, copyWeb, zip" />
-	
+        <csc target="library" output="build/StopWastingMyTime/bin/StopWastingMyTime.dll" debug="${debug}">
+            <sources>
+                <include name="src/StopWastingMyTime/**/*.cs" />
+            </sources>
+            <references>
+                <include name="build/lib/Colourblind.Core.dll" />
+                <include name="lib/*.dll" />
+            </references>
+        </csc>
+    </target>
+    
+    <target name="copyWeb">
+        <copy todir="build/StopWastingMyTime/bin">
+            <fileset basedir="build/lib">
+                <include name="**/*.dll" />
+                <include name="**/*.pdb" />
+                <include name="**/*.xml" />
+            </fileset>
+        </copy>
+        <copy todir="build/StopWastingMyTime/bin">
+            <fileset basedir="lib">
+                <include name="**/*.dll" />
+                <include name="**/*.pdb" />
+                <include name="**/*.xml" />
+            </fileset>
+        </copy>
+        <copy todir="build/StopWastingMyTime">
+            <fileset basedir="src/StopWastingMyTime">
+                <include name="**/*.aspx" />
+                <include name="**/*.ascx" />
+                <include name="**/*.asax" />
+                <include name="**/*.asmx" />
+                <include name="**/*.ashx" />
+                <include name="**/*.pdf" />
+                <include name="**/*.skin" />
+                <include name="**/*.css" />
+                <include name="**/*.gif" />
+                <include name="**/*.jpg" />
+                <include name="**/*.jpeg" />
+                <include name="**/*.png" />
+                <include name="**/*.swf" />
+                <include name="**/*.js" />
+                <include name="**/*.htm" />
+                <include name="**/*.html" />
+                <include name="**/*.Master" />
+                <include name="**/*.mov" />
+                <include name="**/*.browser" />
+                <include name="**/*.xml" />
+                <exclude name="**/skin.css" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="init">
+        <delete>
+            <fileset basedir="build">
+                <include name="**/" />
+                <exclude name="*.zip" />
+            </fileset>
+        </delete>
+    </target>
+    
+    <target name="zip">
+        <tstamp property="buildDate" pattern="yyyyMMddHHmm" verbose="true" />
+        <zip zipfile="build/StopWastingMyTime-${buildDate}.zip">
+            <fileset basedir="build">
+                <include name="StopWastingMyTime/**/*" />
+            </fileset>
+        </zip>
+    </target>
+
+    <target name="deploy" depends="init, build, copyWeb, zip" />
+    
 </project>
