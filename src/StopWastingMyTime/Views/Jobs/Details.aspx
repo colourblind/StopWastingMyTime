@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Default.Master" Inherits="System.Web.Mvc.ViewPage<StopWastingMyTime.Models.Job>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Details
+	<%= Model.JobId %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -43,6 +43,11 @@
                 <td><%= Html.Encode(t.Time) %></td>
             </tr>
         <% } %>
+            <tr>
+                <th></th>
+                <th></th>
+                <th><%= Model.TotalHours %></th>
+            </tr>
         </table>
         
     </fieldset>

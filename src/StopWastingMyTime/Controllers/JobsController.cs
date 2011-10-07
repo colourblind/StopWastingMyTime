@@ -175,6 +175,8 @@ namespace StopWastingMyTime.Controllers
             [DataMember]
             public string EditLink;
             [DataMember]
+            public string DetailsLink;
+            [DataMember]
             public string DeleteLink;
 
             public JobViewData(Models.Job job, UrlHelper urlHelper)
@@ -187,6 +189,7 @@ namespace StopWastingMyTime.Controllers
                 Description = job.Description;
 
                 EditLink = urlHelper.Action("Edit", new { id = job.JobId });
+                DetailsLink = urlHelper.Action("Details", new { id = job.JobId });
                 DeleteLink = urlHelper.Action("Delete", new { id = job.JobId });
             }
         }

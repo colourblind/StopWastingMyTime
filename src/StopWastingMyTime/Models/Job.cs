@@ -23,6 +23,21 @@ namespace StopWastingMyTime.Models
 		}
 		
 		#endregion
-	}
+
+        #region Properties
+
+        private decimal _totalHours = -1;
+        public decimal TotalHours
+        {
+            get
+            {
+                if (_totalHours < 0)
+                    _totalHours = TimeBlocks.Sum(o => o.Time);
+                return _totalHours;
+            }
+        }
+
+        #endregion
+    }
 }
 

@@ -49,7 +49,7 @@
             <td>${IsBillable}</th>
             <td>${IsActive}</th>
             <td>
-                <a href="${EditLink}">Edit</a>&nbsp;|&nbsp;<a href="${DeleteLink}">Delete</a>
+                <a href="${EditLink}">Edit</a>&nbsp;|&nbsp;<a href="${DetailsLink}">Details</a>&nbsp;|&nbsp;<a href="${DeleteLink}">Delete</a>
             </td>
         </tr>
 </script>
