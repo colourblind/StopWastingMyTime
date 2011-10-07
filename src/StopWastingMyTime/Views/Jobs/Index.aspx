@@ -30,6 +30,7 @@
             <th><a href="#" onclick="return dataSet.setSortProperty('ClientName');">Client</a></th>
             <th><a href="#" onclick="return dataSet.setSortProperty('Description');">Description</a></th>
             <th><a href="#" onclick="return dataSet.setSortProperty('QuotedHours');">Quoted Hours</a></th>
+            <th><a href="#" onclick="return dataSet.setSortProperty('TotalHours');">Total Hours</a></th>
             <th><a href="#" onclick="return dataSet.setSortProperty('IsBillable');">Billable</a></th>
             <th><a href="#" onclick="return dataSet.setSortProperty('IsActive');">Active</a></a></th>
             <th></th>
@@ -46,6 +47,7 @@
             <td>${ClientName}</td>
             <td>${Description}</td>
             <td>${QuotedHours}</td>
+            <td>${TotalHours}</td>
             <td>${IsBillable}</td>
             <td>${IsActive}</td>
             <td class="actions">

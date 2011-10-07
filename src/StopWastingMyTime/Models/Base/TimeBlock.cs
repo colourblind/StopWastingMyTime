@@ -22,6 +22,7 @@ namespace StopWastingMyTime.Models.Base
         private string _jobId = String.Empty;
         private DateTime _date = DateTime.Now;
         private decimal _time;
+        private string _comment = String.Empty;
 
         private StopWastingMyTime.Models.Job _job = null;
         private StopWastingMyTime.Models.User _user = null;
@@ -61,6 +62,12 @@ namespace StopWastingMyTime.Models.Base
         {
             get { return _time; }
             set { _time = value; }
+        }
+		
+        public virtual string Comment
+        {
+            get { return _comment; }
+            set { _comment = value; }
         }
 		
 
@@ -133,6 +140,7 @@ namespace StopWastingMyTime.Models.Base
                 _jobId = dataObject.JobId;
                 _date = dataObject.Date;
                 _time = dataObject.Time;
+                _comment = dataObject.Comment;
 
                 _isNew = false;
             }
@@ -154,6 +162,7 @@ namespace StopWastingMyTime.Models.Base
             dataObject.JobId = _jobId;
             dataObject.Date = _date;
             dataObject.Time = _time;
+            dataObject.Comment = _comment;
 
             if (IsNew)
                 dataObject.Insert();

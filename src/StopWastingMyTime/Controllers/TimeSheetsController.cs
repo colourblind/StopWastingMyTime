@@ -33,6 +33,7 @@ namespace StopWastingMyTime.Controllers
             timeBlock.JobId = form["workPackage"];
             timeBlock.Date = ParseDate(date) ?? DateTime.Now.Date;
             timeBlock.Time = Decimal.Parse(form["hours"]);
+            timeBlock.Comment = form["Comment"];
             timeBlock.Save();
 
             return RedirectToAction("TimesheetList", new { date = date });
@@ -48,6 +49,7 @@ namespace StopWastingMyTime.Controllers
             timeBlock.JobId = form["workPackage"];
             timeBlock.Date = ParseDate(date) ?? DateTime.Now.Date;
             timeBlock.Time = Decimal.Parse(form["hours"]);
+            timeBlock.Comment = form["Comment"];
             timeBlock.Save();
 
             return RedirectToAction("TimesheetList", new { date = date });

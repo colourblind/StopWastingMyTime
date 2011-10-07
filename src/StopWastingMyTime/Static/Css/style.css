@@ -96,6 +96,11 @@ fieldset p { clear: left; }
     width: 12em;
 }
 
+#timesheet input.comment
+{   
+    width: 20em;
+}
+
 #timesheet label
 {
     display: inline-block;

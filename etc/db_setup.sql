@@ -52,6 +52,7 @@ CREATE TABLE [dbo].[TimeBlock](
 	[JobId] [nvarchar](50) NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[Time] [numeric](6, 2) NOT NULL,
+	[Comment] [nvarchar](2000) NULL,
  CONSTRAINT [PK_TimeBlock] PRIMARY KEY CLUSTERED 
 (
 	[TimeBlockId] ASC

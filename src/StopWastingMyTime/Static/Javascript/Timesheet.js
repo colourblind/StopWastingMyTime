@@ -10,12 +10,13 @@ $(document).ready(function() {
         var line = $(this).parents('div:first');
         var workPackage = line.find('.workPackage');
         var hours = line.find('.hours');
+        var comment = line.find('.comment');
         
         $.ajax({
             type: 'POST',
             url: '/Timesheets/AddLine' + qs,
-            data: 'workPackage=' + escape(workPackage.val()) + '&hours=' + hours.val(),
-            success: function(data) { $('#timesheet').html(data); $('a.add').siblings('.workPackage').autocomplete({ source: jobData, delay: 0 }).focus(); }
+            data: 'workPackage=' + escape(workPackage.val()) + '&hours=' + hours.val() + '&comment=' + escape(comment.val()),
+            success: function(data) { $('#timesheet').html(data); }
         });
         
         return false;
@@ -48,11 +49,12 @@ $(document).ready(function() {
         var date = line.find('.date');
         var workPackage = line.find('.workPackage');
         var hours = line.find('.hours');
+        var comment = line.find('.comment');
         
         $.ajax({
             type: 'POST',
             url: '/Timesheets/EditLine/' + timeBlockId.val() + qs,
-            data: 'workPackage=' + escape(workPackage.val()) + '&hours=' + hours.val(),
+            data: 'workPackage=' + escape(workPackage.val()) + '&hours=' + hours.val() + '&comment=' + escape(comment.val()),
             success: function(data) { $('#timesheet').html(data); }
         });
 
