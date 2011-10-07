@@ -47,7 +47,7 @@
     </thead>
     <tbody>
     <% foreach (System.Data.DataRow row in ((System.Data.DataTable)ViewData["ProblemReport"]).Rows) { %>
-        <tr class="overrun">
+        <tr class="overrun clickable" class="clickable" onclick="window.location = '<%= Url.Action("Details", "Jobs", new { id = row["Job"] }) %>';">
             <% foreach (var cell in row.ItemArray) {%>
                 <td><%= cell.ToString() %></td>
             <% } %>

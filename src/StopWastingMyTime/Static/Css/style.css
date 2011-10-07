@@ -16,8 +16,6 @@ th { text-align: left; }
 table { width: 100%; }
 fieldset { padding: 1em; }
 p input[type=submit] { margin-left: 14em; }
-tr.clickable { cursor: pointer; }
-tr.clickable:hover { background-color: #eee; }
 
 /* Layout */
 
@@ -109,6 +107,9 @@ fieldset p { clear: left; }
 /* Stuff */
 
 tr.overrun { background-color: #fcc; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover { background-color: #eee; }
+tr.clickable.overrun:hover { background-color: #fbb; }
 
 /* Data display */
 
