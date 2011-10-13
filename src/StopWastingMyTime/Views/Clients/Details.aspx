@@ -22,7 +22,7 @@
                 <th>Quoted Hours</th>
                 <th>Total Hours</th>
             </tr>
-        <% foreach (StopWastingMyTime.Models.Job j in Model.Jobs) { %>
+        <% foreach (StopWastingMyTime.Models.Job j in Model.Jobs.OrderBy(o => o.JobId)) { %>
             <tr>
                 <td><%= Html.ActionLink(j.JobId, "Details", "Jobs", new { id = j.JobId }, null) %></td>
                 <td><%= Html.Encode(j.Description) %></td>

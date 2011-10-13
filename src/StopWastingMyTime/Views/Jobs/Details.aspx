@@ -37,7 +37,7 @@
                 <th>Comment</th>
                 <th>Hours</th>
             </tr>
-        <% foreach (StopWastingMyTime.Models.TimeBlock t in Model.TimeBlocks) { %>
+        <% foreach (StopWastingMyTime.Models.TimeBlock t in Model.TimeBlocks.OrderBy(o => o.Date)) { %>
             <tr>
                 <td><%= Html.Encode(t.User.Name) %></td>
                 <td><%= Html.Encode(t.Date) %></td>
