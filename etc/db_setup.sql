@@ -71,7 +71,51 @@ GO
 ALTER TABLE [dbo].[TimeBlock] CHECK CONSTRAINT [FK_TimeBlock_User]
 GO
 
+
+CREATE TABLE [dbo].[Permission](
+	[PermissionId] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](1000) NULL,
+ CONSTRAINT [PK_Permission] PRIMARY KEY CLUSTERED 
+(
+	[PermissionId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[UserPermissionJoin](
+	[UserId] [nvarchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
+	[PermissionId] [nvarchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
+ CONSTRAINT [PK_UserPermissionJoin] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[PermissionId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[UserPermissionJoin]  WITH CHECK ADD  CONSTRAINT [FK_UserPermissionJoin_Permission] FOREIGN KEY([PermissionId])
+REFERENCES [dbo].[Permission] ([PermissionId])
+GO
+ALTER TABLE [dbo].[UserPermissionJoin] CHECK CONSTRAINT [FK_UserPermissionJoin_Permission]
+GO
+ALTER TABLE [dbo].[UserPermissionJoin]  WITH CHECK ADD  CONSTRAINT [FK_UserPermissionJoin_User] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([UserId])
+GO
+ALTER TABLE [dbo].[UserPermissionJoin] CHECK CONSTRAINT [FK_UserPermissionJoin_User]
+
+
+
+
 INSERT INTO [User] (UserId, Password, Name, Active) VALUES ('admin', 'LQ4/uCiyHKMAL4i6shtWMcWiOuvz4Vs=', 'Admin', 1)
+GO
+
+INSERT INTO [Permission] (PermissionId, Description) VALUES ('USER_ADMIN', 'Create, edit and delete users')
+INSERT INTO [Permission] (PermissionId, Description) VALUES ('REPORTS', 'Download reports')
+GO
+
+INSERT INTO [UserPermissionJoin] (UserId, PermissionId) VALUES ('admin', 'USER_ADMIN')
+INSERT INTO [UserPermissionJoin] (UserId, PermissionId) VALUES ('admin', 'REPORTS')
 GO
 
 ROLLBACK TRAN -- Replace me with COMMIT TRAN to run!

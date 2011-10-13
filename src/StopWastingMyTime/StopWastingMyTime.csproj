@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="Models\Base\Client.cs" />
     <Compile Include="Models\Base\Job.cs" />
+    <Compile Include="Models\Base\Permission.cs" />
     <Compile Include="Models\Base\TimeBlock.cs" />
     <Compile Include="Models\Base\User.cs" />
     <Compile Include="Models\Client.cs" />
@@ -92,10 +93,13 @@
     <Compile Include="Models\Data\Code\ConnectionFactory.cs" />
     <Compile Include="Models\Data\Code\DataUtils.cs" />
     <Compile Include="Models\Data\Job.cs" />
+    <Compile Include="Models\Data\Permission.cs" />
     <Compile Include="Models\Data\Reporting.cs" />
     <Compile Include="Models\Data\TimeBlock.cs" />
     <Compile Include="Models\Data\User.cs" />
+    <Compile Include="Models\Data\UserPermissionJoin.cs" />
     <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\TimeBlock.cs" />
     <Compile Include="Models\User.cs" />

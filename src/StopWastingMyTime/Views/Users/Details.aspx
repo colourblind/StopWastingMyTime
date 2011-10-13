@@ -20,6 +20,15 @@
         <div class="display-label">Active</div>
         <div class="display-field"><%= Html.Encode(Model.Active) %></div>
         
+        <div class="display-label">Permissions</div>
+        <div class="display-field">
+            <ul>
+            <% foreach (StopWastingMyTime.Models.Permission p in Model.Permissions) { %>
+                <li><%= Html.Encode(p.PermissionId) %></li>
+            <% } %>
+            </ul>
+        </div>
+        
     </fieldset>
     <p>
         <%= Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) %> |

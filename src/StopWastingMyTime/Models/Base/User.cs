@@ -22,8 +22,9 @@ namespace StopWastingMyTime.Models.Base
         private string _name = String.Empty;
         private bool _active;
 
-
-        private List<StopWastingMyTime.Models.TimeBlock> _timeBlocks = null;
+        
+        private List<StopWastingMyTime.Models.TimeBlock> _timeBlocks = null; 
+        private List<StopWastingMyTime.Models.Permission> _permissions = null; // m2m
 
         private bool _isNew = true;
 
@@ -63,6 +64,21 @@ namespace StopWastingMyTime.Models.Base
                 if (_timeBlocks == null)
                     _timeBlocks = TimeBlock.SelectByUserId(UserId);
                 return _timeBlocks;
+            }
+        }
+
+        // Many to many
+        public virtual IList<StopWastingMyTime.Models.Permission> Permissions
+        {
+            get
+            {
+                if (_permissions == null)
+                {
+                    _permissions = new List<StopWastingMyTime.Models.Permission>();
+                    foreach (Data.UserPermissionJoin d in Data.UserPermissionJoin.SelectByUserId(UserId))
+                        _permissions.Add(new StopWastingMyTime.Models.Permission(d.PermissionId));
+                }
+                return _permissions;
             }
         }
         public bool IsNew
@@ -153,6 +169,7 @@ namespace StopWastingMyTime.Models.Base
                 timeBlock.UserId = UserId;
                 timeBlock.Restore();
             }
+            // TODO: fix m2m relationships in template
             
             Refresh();
         }
@@ -166,6 +183,7 @@ namespace StopWastingMyTime.Models.Base
         public virtual void Refresh()
         {
             _timeBlocks = null;
+            _permissions = null;
         }
         
         public override bool Equals(object obj)
