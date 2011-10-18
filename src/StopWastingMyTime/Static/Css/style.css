@@ -139,6 +139,12 @@ p input[type=submit] { margin-left: 10em; }
     font-weight: bold;
 }
 
+#timesheet .total
+{
+    margin-left: 13em;
+    font-weight: bold;
+}
+
 /* Stuff */
 
 tr.overrun { background-color: #fcc; }

@@ -23,4 +23,7 @@
             <input type="text" class="comment" />
             <a href="#" class="add">Add</a>
         </div>
+        <div>
+            <span class="total"><%= Model.Sum(o => o.Time) %></span>
+        </div>
         
