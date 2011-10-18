@@ -40,6 +40,12 @@ namespace StopWastingMyTime.Models
 
         #region Methods
 
+        public override void Delete()
+        {
+            ClearPermissions();
+            base.Delete();
+        }
+
         public static User Validate(string username, string password)
         {
             User user = new User(username);
@@ -47,6 +53,29 @@ namespace StopWastingMyTime.Models
                 return user;
             else
                 return null;
+        }
+
+        public bool HasPermission(string permissionId)
+        {
+            return Permissions.Where(o => o.PermissionId == permissionId).Count() > 0;
+        }
+
+        public void ClearPermissions()
+        {
+            foreach (Permission p in Permissions)
+                Data.UserPermissionJoin.Delete(UserId, p.PermissionId);
+
+            Refresh();
+        }
+
+        public void AddPermission(string permissionId)
+        {
+            Data.UserPermissionJoin j = new Data.UserPermissionJoin();
+            j.UserId = UserId;
+            j.PermissionId = permissionId;
+            j.Insert();
+
+            Refresh();
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Colourblind.Core;
 
@@ -21,6 +22,7 @@ namespace StopWastingMyTime.Controllers
         [PermissionsRequired("USER_ADMIN")]
         public ActionResult Create()
         {
+            ViewData["PermissionList"] = Models.Permission.SelectAll().Select(o => o.PermissionId);
             return View();
         } 
 
@@ -43,10 +45,14 @@ namespace StopWastingMyTime.Controllers
 
                 user.Save();
 
+                foreach (string permission in form["permission"].Split(','))
+                    user.AddPermission(permission);
+
                 return RedirectToAction("Index");
             }
             catch
             {
+                ViewData["PermissionList"] = Models.Permission.SelectAll().Select(o => o.PermissionId);
                 return View();
             }
         }
@@ -54,6 +60,7 @@ namespace StopWastingMyTime.Controllers
         [PermissionsRequired("USER_ADMIN")]
         public ActionResult Edit(string id)
         {
+            ViewData["PermissionList"] = Models.Permission.SelectAll().Select(o => o.PermissionId);
             return View(new Models.User(id));
         }
 
@@ -80,11 +87,16 @@ namespace StopWastingMyTime.Controllers
                     throw new InvalidOperationException("Input failed model validation");
 
                 user.Save();
- 
+
+                user.ClearPermissions();
+                foreach (string permission in form["permission"].Split(','))
+                    user.AddPermission(permission);
+
                 return RedirectToAction("Index");
             }
             catch
             {
+                ViewData["PermissionList"] = Models.Permission.SelectAll().Select(o => o.PermissionId);
                 return View(new Models.User(id));
             }
         }

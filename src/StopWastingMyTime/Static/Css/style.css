@@ -115,8 +115,10 @@ input, select, textarea { border: 1px solid #ccc; margin: 2px; font-size: 1em; c
 textarea { font-family: Segoe UI, Tahoma, Helvetica, Sans-Serif; width: 25em; height: 7em; }
 .field-validation-error, .validation-summary-errors { color: #f00; }
 .validation-summary-errors ul { list-style: none; padding-left: 0; }
-.display-label, .editor-label { font-weight: bold; width: 10em; margin-bottom: 1em; float: left; clear: left; }
+.display-label, .editor-label { font-weight: bold; width: 10em; float: left; clear: left; }
+.editor-field { margin-bottom: 0.75em; }
 .display-field, .editor-field { float: left; }
+.editor-field ul { margin: 0; padding: 0; list-style: none; }
 fieldset p { clear: left; }
 p input[type=submit] { margin-left: 10em; }
 

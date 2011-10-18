@@ -52,6 +52,20 @@
                 <%= Html.CheckBoxFor(model => model.Active) %>
                 <%= Html.ValidationMessageFor(model => model.Active) %>
             </div>
+
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Permissions) %>
+            </div>
+            <div class="editor-field">
+                <ul>
+                <% foreach (string permission in (IEnumerable<string>)ViewData["PermissionList"]) { %>
+                    <li>
+                    <input type="checkbox" name="permission" value="<%= Html.Encode(permission) %>"<%= Model.HasPermission(permission) ? " checked=\"checked\"" : "" %> />
+                    <%= Html.Encode(permission) %>
+                    </li>
+                <% } %>
+                </ul>
+            </div>
             
             <p>
                 <input type="submit" value="Save" />

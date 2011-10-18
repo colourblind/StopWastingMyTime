@@ -21,7 +21,7 @@ namespace StopWastingMyTime
 
             foreach (string permission in _requiredPermissions)
             {
-                if (user.Permissions.Where(o => o.PermissionId == permission).Count() == 0)
+                if (!user.HasPermission(permission))
                     throw new UnauthorizedAccessException(String.Format("User does not have required permission", user.UserId, permission));
             }
         }

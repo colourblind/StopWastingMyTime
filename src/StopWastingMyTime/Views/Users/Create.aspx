@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Creater</h2>
+    <h2>Create User</h2>
 
     <% using (Html.BeginForm()) {%>
         <%= Html.ValidationSummary(true) %>
@@ -51,6 +51,20 @@
             <div class="editor-field">
                 <%= Html.CheckBoxFor(model => model.Active) %>
                 <%= Html.ValidationMessageFor(model => model.Active) %>
+            </div>
+            
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Permissions) %>
+            </div>
+            <div class="editor-field">
+                <ul>
+                <% foreach (string permission in (IEnumerable<string>)ViewData["PermissionList"]) { %>
+                    <li>
+                    <input type="checkbox" name="permission" value="<%= Html.Encode(permission) %>" />
+                    <%= Html.Encode(permission) %>
+                    </li>
+                <% } %>
+                </ul>
             </div>
             
             <p>
