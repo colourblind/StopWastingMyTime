@@ -6,22 +6,26 @@ namespace StopWastingMyTime.Controllers
 {
     public class UsersController : Controller
     {
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Index()
         {
             return View(Models.User.SelectAll());
         }
 
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Details(string id)
         {
             return View(new Models.User(id));
         }
 
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Create()
         {
             return View();
         } 
 
         [HttpPost]
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Create(FormCollection form)
         {
             try
@@ -46,13 +50,15 @@ namespace StopWastingMyTime.Controllers
                 return View();
             }
         }
-        
+
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Edit(string id)
         {
             return View(new Models.User(id));
         }
 
         [HttpPost]
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Edit(string id, FormCollection form)
         {
             try
@@ -83,12 +89,14 @@ namespace StopWastingMyTime.Controllers
             }
         }
 
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Delete(string id)
         {
             return View(new Models.User(id));
         }
 
         [HttpPost]
+        [PermissionsRequired("USER_ADMIN")]
         public ActionResult Delete(string id, FormCollection collection)
         {
             try
