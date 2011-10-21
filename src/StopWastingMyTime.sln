@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopWastingMyTime", "StopWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colourblind.Core", "Colourblind.Core\Colourblind.Core.csproj", "{92F03B9D-44B4-4E79-B42D-49B07900EF67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopWastingMyTime.Models", "StopWastingMyTime.Models\StopWastingMyTime.Models.csproj", "{0A254CB0-E69B-4549-895C-82354983A0E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{92F03B9D-44B4-4E79-B42D-49B07900EF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92F03B9D-44B4-4E79-B42D-49B07900EF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92F03B9D-44B4-4E79-B42D-49B07900EF67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A254CB0-E69B-4549-895C-82354983A0E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A254CB0-E69B-4549-895C-82354983A0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A254CB0-E69B-4549-895C-82354983A0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A254CB0-E69B-4549-895C-82354983A0E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

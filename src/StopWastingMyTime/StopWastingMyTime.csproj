@@ -31,21 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NPOI, Version=1.2.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\NPOI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -65,7 +59,6 @@
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
@@ -83,27 +76,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Base\Client.cs" />
-    <Compile Include="Models\Base\Job.cs" />
-    <Compile Include="Models\Base\Permission.cs" />
-    <Compile Include="Models\Base\TimeBlock.cs" />
-    <Compile Include="Models\Base\User.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Data\Client.cs" />
-    <Compile Include="Models\Data\Code\BigBallOfSql.cs" />
-    <Compile Include="Models\Data\Code\ConnectionFactory.cs" />
-    <Compile Include="Models\Data\Code\DataUtils.cs" />
-    <Compile Include="Models\Data\Job.cs" />
-    <Compile Include="Models\Data\Permission.cs" />
-    <Compile Include="Models\Data\Reporting.cs" />
-    <Compile Include="Models\Data\TimeBlock.cs" />
-    <Compile Include="Models\Data\User.cs" />
-    <Compile Include="Models\Data\UserPermissionJoin.cs" />
-    <Compile Include="Models\Job.cs" />
-    <Compile Include="Models\Permission.cs" />
-    <Compile Include="Models\Report.cs" />
-    <Compile Include="Models\TimeBlock.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +124,10 @@
     <ProjectReference Include="..\Colourblind.Core\Colourblind.Core.csproj">
       <Project>{92F03B9D-44B4-4E79-B42D-49B07900EF67}</Project>
       <Name>Colourblind.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StopWastingMyTime.Models\StopWastingMyTime.Models.csproj">
+      <Project>{0A254CB0-E69B-4549-895C-82354983A0E4}</Project>
+      <Name>StopWastingMyTime.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
