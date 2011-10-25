@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Net.Mail;
 using System.Xml;
 
@@ -13,17 +14,17 @@ namespace Colourblind.Core
         private string _subject;
         private string _from;
         private string _body;
-        private EmailTemplate _template;
-        
+
         #endregion
-    
+
         #region Properties
 
         public EmailTemplate Template
         {
-            get { return _template; }
+            get;
+            private set;
         }
-        
+
         public string Subject
         {
             get
@@ -38,7 +39,7 @@ namespace Colourblind.Core
                 _subject = value;
             }
         }
-        
+
         public string From
         {
             get
@@ -68,25 +69,35 @@ namespace Colourblind.Core
                 _body = value;
             }
         }
-        
-        public List<string> Recipients
+
+        public IList<string> Recipients
         {
-            get; set;
+            get;
+            set;
         }
 
-        public List<string> Cc
+        public IList<string> Cc
         {
-            get; set;
+            get;
+            set;
         }
 
-        public List<string> Bcc
+        public IList<string> Bcc
         {
-            get; set;
+            get;
+            set;
+        }
+
+        public IList<string> Attachments
+        {
+            get;
+            set;
         }
 
         public bool IsHtml
         {
-            get; set;
+            get;
+            set;
         }
 
         #endregion
@@ -100,10 +111,10 @@ namespace Colourblind.Core
             Bcc = new List<string>();
             IsHtml = true;
         }
-        
+
         internal Email(EmailTemplate template) : this()
         {
-            _template = template;
+            Template = template;
         }
 
         #endregion
@@ -128,26 +139,16 @@ namespace Colourblind.Core
             message.Subject = Subject;
             message.Body = Body;
 
-            SmtpClient smtp = new SmtpClient();
-
-            string host = ConfigurationManager.AppSettings["SmtpHost"];
-            string username = ConfigurationManager.AppSettings["SmtpUsername"];
-            string password = ConfigurationManager.AppSettings["SmtpPassword"];
-
-            if (String.IsNullOrEmpty(host))
-                smtp.Host = "localhost";
-            else
-                smtp.Host = host;
-
-            if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
+            foreach (string attachmentFilename in Attachments)
             {
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential(username, password);
+                Attachment a = new Attachment(attachmentFilename);
+                message.Attachments.Add(a);
             }
 
+            SmtpClient smtp = new SmtpClient();
             smtp.Send(message);
         }
-        
+
         #endregion
     }
 
@@ -158,11 +159,11 @@ namespace Colourblind.Core
         private XmlDocument _xmlDocument;
         private Dictionary<string, string> _parameters;
         private List<string> _keys;
-        
+
         #endregion
-        
+
         #region Properties
-        
+
         internal string From
         {
             get
@@ -173,7 +174,7 @@ namespace Colourblind.Core
                 return result;
             }
         }
-        
+
         internal string Subject
         {
             get
@@ -184,7 +185,7 @@ namespace Colourblind.Core
                 return result;
             }
         }
-        
+
         internal string Body
         {
             get
@@ -195,7 +196,7 @@ namespace Colourblind.Core
                 return result;
             }
         }
-        
+
         #endregion
 
         #region Constructors
@@ -232,17 +233,17 @@ namespace Colourblind.Core
             email.Body = Body;
 
             ValidateParameters();
-            
+
             // Add parameters
             foreach (string key in _keys)
             {
                 email.Subject.Replace("%" + key + "%", _parameters[key]);
                 email.Body.Replace("%" + key + "%", _parameters[key]);
             }
-            
+
             return email;
         }
-        
+
         private void ValidateParameters()
         {
             foreach (string key in _keys)
@@ -251,7 +252,7 @@ namespace Colourblind.Core
                     throw new IndexOutOfRangeException("Missing parameter for key \"" + key + "\"");
             }
         }
-        
+
         private void LoadKeys()
         {
             foreach (XmlNode keyNode in _xmlDocument.DocumentElement.SelectNodes("key"))
@@ -266,10 +267,22 @@ namespace Colourblind.Core
                 result = node.InnerText;
             return result;
         }
-        
+
         public static Email Load(string filename)
         {
             EmailTemplate template = new EmailTemplate(ConfigurationManager.AppSettings["EmailTemplatePath"] + filename + ".xml");
+            return new Email(template);
+        }
+
+        public static Email LoadFromFullPath(string filename)
+        {
+            EmailTemplate template = new EmailTemplate(filename + ".xml");
+            return new Email(template);
+        }
+
+        public static Email LoadFromAppRelativePath(string filename)
+        {
+            EmailTemplate template = new EmailTemplate(Environment.CurrentDirectory + "\\" + filename + ".xml");
             return new Email(template);
         }
 
